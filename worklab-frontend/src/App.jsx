@@ -1,7 +1,7 @@
 function App() {
   return (
-    <div className='bg-gray-700'>
-      <h1>Worklab Fullstack Desafio</h1>
+    <div className='bg-purple-500'>
+      <h1>Worklab</h1>
     </div>
   )
 }
