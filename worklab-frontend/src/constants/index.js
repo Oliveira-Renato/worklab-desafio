@@ -1,6 +1,17 @@
 export const navLinks = [
     {
-        id: "cadastrar",
-        title: "Tela de Cadstro",
+        id: "pacientes",
+        title: "Pacientes",
+        rota: "/pacientes",
+    },
+    {
+        id: "exames",
+        title: "Exames",
+        rota: "/exames",
+    },
+    {
+        id: "cadastro",
+        title: "Cadastro",
+        rota: "/cadastro",
     },
 ];
