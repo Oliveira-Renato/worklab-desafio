@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const navigation = [
   { name: "Paciente", to: "/cadastrar/paciente" },
