@@ -3,8 +3,9 @@ import { createBrowserRouter } from 'react-router-dom'
 import App from './App'
 import Pacientes from './pages/Pacientes'
 import Exames from './pages/Exames'
-import DefaultLayout from './components/DefaultLayout'
-import MenuCadastro from './pages/Menu'
+import CadastrarPacientes from './pages/Pacientes'
+// import DefaultLayout from './components/DefaultLayout'
+// import MenuCadastro from './pages/Menu'
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/pacientes',
-        element: <Pacientes />
+        element: <Pacientes />,
       },
       {
         path: '/exames',

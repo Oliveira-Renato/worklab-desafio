@@ -6,7 +6,6 @@ const navigation = [
   { name: "Exame", to: "/exames" },
 ]
 
-
 export default function Menu() {
   const location = useLocation();
   const shouldHideMenu = location.pathname !== "/";

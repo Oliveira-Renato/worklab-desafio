@@ -1,6 +1,7 @@
 import Menu from "./pages/Menu.jsx";
 import NavBar from "./components/NavBar.jsx";
 import { Outlet } from "react-router-dom";
+import CadastrarPacientes from './pages/Pacientes'
 
 function App() {
   return (
