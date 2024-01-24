@@ -5,7 +5,7 @@ import worklabLog from "../assets/logo-worklab.png";
 
 export default function NavBar() {
   return (
-    <nav className={`${styles.paddingX} bg-primary w-full flex items-center fixed top-0 z-20`}>
+    <nav className={`${styles.paddingX} bg-primary w-full flex items-center`}>
         <div className="w-full flex justify-between items-center text-white  max-w-8xl mx-auto">
           <Link
             to={'/'}
