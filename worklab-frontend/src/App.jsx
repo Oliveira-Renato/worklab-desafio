@@ -5,7 +5,13 @@ import CadastrarPacientes from "./pages/CadastrarPacientes";
   return (
     <div className="p-12">
       {/* <CadastrarPacientes  /> */}
-      <CadastrarExames />
+      <div>
+        <div>
+          <button>Cadastrar Paciente</button>
+          <button>Cadastrar Exame</button>
+        </div>
+      </div>
+      {/* <CadastrarExames /> */}
     </div>
   )
 }
