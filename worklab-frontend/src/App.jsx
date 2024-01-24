@@ -3,10 +3,10 @@ import CadastrarPacientes from "./pages/CadastrarPacientes";
 
  function App() {
   return (
-    <div className="p-12">
+    <div className="w-full h-full">
       {/* <CadastrarPacientes  /> */}
-      <div>
-        <div>
+      <div className="h-full flex justify-center items-start">
+        <div className="flex flex-wrap">
           <button>Cadastrar Paciente</button>
           <button>Cadastrar Exame</button>
         </div>
