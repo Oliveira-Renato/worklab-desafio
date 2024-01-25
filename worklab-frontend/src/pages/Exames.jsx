@@ -34,14 +34,17 @@ export default function Exames() {
                 <p className="mt-1 text-sm leading-6 text-gray-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
 
               
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
+                <div className="w-full">
                   {/* normal input */}
-                  <Input name={"Descrição"} />
-
-                  {/* normal input */}
-                  <Input name={"Valor"} />
-
+                  <div className="mt-10 flex flex-wrap gap-4">
+                    <div className="flex-1">
+                      <Input name={"Descrição"} />
+                    </div>
+                    {/* normal input */}
+                    <div className="">
+                      <Input name={"Valor"} />
+                    </div>
+                  </div>
                 </div>
 
               </div>
