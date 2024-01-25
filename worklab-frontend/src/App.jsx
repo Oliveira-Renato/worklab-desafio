@@ -1,9 +1,15 @@
+import Menu from "./pages/Menu.jsx";
+import NavBar from "./components/NavBar.jsx";
+import { Outlet } from "react-router-dom";
+
 function App() {
   return (
-    <div className='bg-gray-700'>
-      <h1>Worklab Fullstack Desafio</h1>
+    <div className="w-full h-screen">
+      <NavBar />
+      <Menu />
+      <Outlet />
     </div>
   )
 }
 
-export default App
+export default App;
