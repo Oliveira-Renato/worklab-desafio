@@ -1,4 +1,21 @@
+import { useNavigate  } from "react-router-dom";
+
 export default function CadastrarPacientes() {
+  const navigateTo  = useNavigate ();
+
+
+  const handleCancelarClick = () => {
+    // Navegar de volta para a rota "pacientes"
+    console.log('chamou')
+    navigateTo('/pacientes')
+  };
+    
+  
+
+  const handleSalvarClick = () => {
+    // Adicione a lógica de salvamento 
+  };
+
   return (
     <form>
         <div className="space-y-12">
@@ -83,7 +100,11 @@ export default function CadastrarPacientes() {
 
        {/* buttons */}
         <div className="mt-6 flex items-center justify-end gap-x-6">
-          <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+           <button
+            type="button"
+            onClick={handleCancelarClick}
+            className="text-sm font-semibold leading-6 text-gray-900  hover:bg-indigo-500 "
+          >
             Cancelar
           </button>
           <button
@@ -93,6 +114,6 @@ export default function CadastrarPacientes() {
             Salvar
           </button>
         </div>
-      </form>
+    </form>
   )
 }
