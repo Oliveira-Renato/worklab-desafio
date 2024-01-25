@@ -30,20 +30,18 @@ export default function Exames() {
           <form>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
-                <h2 className="text-base font-semibold leading-7 text-gray-900">Cadastrar Exame</h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
+                <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
+                  <h2 className="text-3xl font-bold mb-2">Cadastro de Exames</h2>
+                  <p className="text-lg">Registre os resultados dos exames para uma gestão precisa da saúde dos pacientes.</p>
+                </div>
 
               
                 <div className="w-full">
                   {/* normal input */}
-                  <div className="mt-10 flex flex-wrap gap-4">
-                    <div className="flex-1">
+                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                       <Input name={"Descrição"} />
-                    </div>
                     {/* normal input */}
-                    <div className="">
                       <Input name={"Valor"} />
-                    </div>
                   </div>
                 </div>
 
@@ -72,6 +70,10 @@ export default function Exames() {
       ) : (
         //tabela de exames
         <div>
+          <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
+            <h2 className="text-3xl font-bold mb-2">Lista de Exames</h2>
+            <p className="text-lg">Lista de exames dos pacientes.</p>
+          </div>
           {/* div buttons */}
           <div className="flex justify-between m-auto">
             <button

@@ -6,12 +6,10 @@ import { styles } from "./utils/styles.js"
 
 function App() {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-screen">
       <NavBar />
-      <div className={`${styles.padding}`}>
-        <Menu />
-        <Outlet />
-      </div>
+      <Menu />
+      <Outlet />
     </div>
   )
 }

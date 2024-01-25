@@ -11,8 +11,13 @@ export default function Menu() {
   const shouldHideMenu = location.pathname !== "/";
 
   return (
-    <div className={`${shouldHideMenu ? 'hidden' : ''} flex justify-center items-start mt-20`} >
-      <div className="flex flex-wrap gap-5">
+    <div className={`${shouldHideMenu ? 'hidden' : ''}`} >
+      <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
+        <h2 className="text-3xl font-bold mb-2">Menu Principal</h2>
+        <p className="text-lg">Explore as funcionalidades do nosso sistema.</p>
+      </div>
+
+      <div className="flex justify-center items-center flex-wrap gap-5">
         {navigation.map((item) => (
           <NavLink
             key={item.name}
@@ -24,7 +29,7 @@ export default function Menu() {
           </NavLink>
         ))}
       </div>
-
+      
     </div>
   )
 }
