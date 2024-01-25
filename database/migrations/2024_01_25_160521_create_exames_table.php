@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('exames', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo')->unique()->default(mt_rand(10000, 999999));
+            $table->string('codigo')->unique();
             $table->string('descricao');
             $table->decimal('valor', 8, 2);
             $table->timestamps();

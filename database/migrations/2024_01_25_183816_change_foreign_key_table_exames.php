@@ -14,10 +14,10 @@ return new class extends Migration {
     {
         Schema::table('exames', function (Blueprint $table) {
             // Remover a chave estrangeira existente
-            $table->dropForeign(['paciente_id']);
+            //$table->dropForeign(['paciente_id']);
 
-            // Adicionar nova chave estrangeira usando numero_atendimento
-            $table->foreign('paciente_numero_atendimento')->references('numero_atendimento')->on('pacientes');
+            // Remover a coluna paciente_id
+            $table->dropColumn('paciente_id');
         });
     }
 
@@ -28,6 +28,12 @@ return new class extends Migration {
      */
     public function down()
     {
-
+        // Recriar a coluna paciente_id, se necessário
+        Schema::table('exames', function (Blueprint $table) {
+            $table->unsignedBigInteger('paciente_id');
+            $table->foreign('paciente_id')->references('id')->on('pacientes');
+        });
     }
 };
+
+

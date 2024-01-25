@@ -10,7 +10,7 @@ class PacienteController extends Controller
     //
     public function index()
     {
-        $pacientes = Paciente::all();
+        $pacientes = Paciente::with('exames')->get();
         return response()->json($pacientes);
     }
     public function store(Request $request)

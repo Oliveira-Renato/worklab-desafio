@@ -10,6 +10,6 @@ class Paciente extends Model
 
     public function exames()
     {
-        return $this->hasMany(Exame::class);
+        return $this->hasMany(Exame::class, 'paciente_numero_atendimento', 'numero_atendimento');
     }
 }
