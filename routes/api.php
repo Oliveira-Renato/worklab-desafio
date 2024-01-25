@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ExameController;
+use App\Http\Controllers\PacienteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
