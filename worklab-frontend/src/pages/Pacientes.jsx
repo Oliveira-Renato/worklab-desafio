@@ -25,6 +25,7 @@ export default function Pacientes() {
   return (
     <div>
       {cadastrarPacienteClicked ? (
+
         <div>
           <form>
             <div className="space-y-12 m-auto">
@@ -88,6 +89,7 @@ export default function Pacientes() {
             </div>
           </form>
         </div>
+
       ) : (
         <div>
           <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
@@ -144,6 +146,7 @@ export default function Pacientes() {
                 </tbody>
               </table>
             </div>
+            
           </div>
         </div>
       )}
