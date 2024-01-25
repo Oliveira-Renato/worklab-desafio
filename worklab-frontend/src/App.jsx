@@ -1,8 +1,6 @@
 import Menu from "./pages/Menu.jsx";
 import NavBar from "./components/NavBar.jsx";
 import { Outlet } from "react-router-dom";
-import { styles } from "./utils/styles.js"
-
 
 function App() {
   return (
