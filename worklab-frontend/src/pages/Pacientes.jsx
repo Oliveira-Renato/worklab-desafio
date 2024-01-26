@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styles } from '../utils/styles'
 import Input from "../components/Input";
+import axiosClient from "../axios";
 
 const Pacientes = () => {
   const [paciente, setPaciente] = useState({
@@ -28,7 +29,16 @@ const Pacientes = () => {
   }
 
   const handleSalvar = (e) => {
+    e.preventDefault()
 
+    //enviar para backend
+    axiosClient.post('/pacientes', paciente)
+    .then(response => {
+      console.log('Paciente cadastrado com sucesso', paciente.data)
+    })
+    .catch( error => {
+      console.error('Erro ao cadastrar paciente:', error)
+    })
   }
 
   useEffect(()=>{
