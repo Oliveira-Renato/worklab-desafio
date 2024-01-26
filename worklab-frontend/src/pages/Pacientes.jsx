@@ -5,12 +5,14 @@ import Input from "../components/Input";
 import axiosClient from "../axios";
 
 const Pacientes = () => {
+  const [ loading, setLoading ] = useState(false)
   const [paciente, setPaciente] = useState({
     nome_completo: "",
     email: "",
     celular: "",
     sexo: "M"
   })
+
   const [cadastrarPacienteClicked, setCadastrarPacienteClicked] = useState(false);
   const navigateTo = useNavigate()
 
@@ -30,14 +32,24 @@ const Pacientes = () => {
 
   const handleSalvar = (e) => {
     e.preventDefault()
+    setLoading(true)
 
     //enviar para backend
     axiosClient.post('/pacientes', paciente)
     .then(response => {
       console.log('Paciente cadastrado com sucesso', paciente.data)
+      setPaciente({
+        nome_completo: "",
+        email: "",
+        celular: "",
+        sexo: ""
+      })
+
+      setLoading(false)
     })
     .catch( error => {
       console.error('Erro ao cadastrar paciente:', error)
+      setLoading(false)
     })
   }
 
@@ -109,7 +121,7 @@ const Pacientes = () => {
                       type="submit"
                       className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Salvar
+                      { loading ? 'Salvando...' : 'Salvar' }
                     </button>
                   </div>
 
