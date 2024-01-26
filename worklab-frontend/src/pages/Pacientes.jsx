@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "../components/Input";
 import { styles } from '../utils/styles'
+import Input from "../components/Input";
 
-export default function Pacientes() {
+const Pacientes = () => {
+  const [paciente, setPaciente] = useState({
+    nomeCompleto: "",
+    email: "",
+    celular: "",
+    sexo: "M"
+  })
+  
   const [cadastrarPacienteClicked, setCadastrarPacienteClicked] = useState(false);
   const navigateTo = useNavigate()
 
@@ -25,8 +32,9 @@ export default function Pacientes() {
   return (
     <div>
       {cadastrarPacienteClicked ? (
-
         <div>
+          
+          {/* formulario de paciente */}
           <form>
             <div className="space-y-12 m-auto">
               <div className="border-b border-gray-900/10 pb-12">
@@ -64,6 +72,7 @@ export default function Pacientes() {
                         </select>
                       </div>
                     </div>
+
                   </div>
 
 
@@ -88,6 +97,7 @@ export default function Pacientes() {
               </div>
             </div>
           </form>
+
         </div>
 
       ) : (
@@ -153,3 +163,6 @@ export default function Pacientes() {
     </div>
   );
 }
+
+
+export default Pacientes;
