@@ -12,11 +12,11 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table('pacientes', function (Blueprint $table) {
-            $table->timestamps();
-        });
-
-        Schema::table('exames', function (Blueprint $table) {
+        Schema::create('exames', function (Blueprint $table) {
+            $table->id();
+            $table->string('codigo')->unique();
+            $table->string('descricao');
+            $table->decimal('valor', 8, 2);
             $table->timestamps();
         });
     }
@@ -28,8 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::table('pacientes_and_exames', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('exames');
     }
 };
