@@ -10,7 +10,6 @@ const Pacientes = () => {
     celular: "",
     sexo: "M"
   })
-  
   const [cadastrarPacienteClicked, setCadastrarPacienteClicked] = useState(false);
   const navigateTo = useNavigate()
 
@@ -24,6 +23,14 @@ const Pacientes = () => {
 
   const handleVoltarParaMenu = () => navigateTo('/')
 
+  const handleInputChange = (campo, valor) => {
+    setPaciente((prevPaciente) => ({...prevPaciente, [campo]: valor}))
+  }
+
+  const handleSalvar = (e) => {
+
+  }
+
   useEffect(()=>{
 
   }, [cadastrarPacienteClicked])
@@ -35,7 +42,7 @@ const Pacientes = () => {
         <div>
           
           {/* formulario de paciente */}
-          <form>
+          <form onSubmit={handleSalvar}>
             <div className="space-y-12 m-auto">
               <div className="border-b border-gray-900/10 pb-12">
                 <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
@@ -46,14 +53,15 @@ const Pacientes = () => {
               
                 <div className={`${styles.padding} w-full`}>
                   <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    {/* normal input */}
-                    <Input name={'Nome Completo'}/>
-
-                    {/* normal input */}
-                    <Input name={'E-mail'}/>
-
-                    {/* normal input */}
-                    <Input name={'Celular'}/>
+                    {/* Renderização  dinamica de inputs */}
+                    {['Nome Completo', 'E-mail', 'Celular'].map((campo) => (
+                      <Input
+                        key={campo}
+                        label={campo}
+                        value={paciente[campo.toLowerCase()]}
+                        onChange={handleInputChange}
+                      />
+                    ))}
 
                     {/* input select */}
                     <div className="sm:col-span-3">
