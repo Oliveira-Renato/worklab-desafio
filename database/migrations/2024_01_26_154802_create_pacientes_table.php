@@ -13,13 +13,11 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('pacientes', function (Blueprint $table) {
-            $table->id();
-            $table->string('numero_atendimento')->unique()->default(mt_rand(1, 9999));
+            $table->id('numero_atendimento');
             $table->string('nome_completo');
-            $table->string('sexo');
+            $table->string('sexo')->nullable();
             $table->string('email')->nullable();
             $table->string('celular')->nullable();
-            $table->timestamps();
         });
     }
 

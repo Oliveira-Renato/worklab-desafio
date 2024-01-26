@@ -14,10 +14,12 @@ return new class extends Migration {
     {
         Schema::create('exames', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo')->unique();
+            $table->string('codigo');
             $table->string('descricao');
             $table->decimal('valor', 8, 2);
-            $table->timestamps();
+            $table->unsignedBigInteger('paciente_numero_atendimento');
+
+            $table->foreign('paciente_numero_atendimento')->references('numero_atendimento')->on('pacientes');
         });
     }
 
