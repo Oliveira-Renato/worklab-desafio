@@ -6,7 +6,7 @@ import axiosClient from "../axios";
 
 const Pacientes = () => {
   const [paciente, setPaciente] = useState({
-    nomeCompleto: "",
+    nome_completo: "",
     email: "",
     celular: "",
     sexo: "M"
@@ -64,11 +64,11 @@ const Pacientes = () => {
                 <div className={`${styles.padding} w-full`}>
                   <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     {/* Renderização  dinamica de inputs */}
-                    {['Nome Completo', 'E-mail', 'Celular'].map((campo) => (
+                    {['nome_completo', 'email', 'celular'].map((campo) => (
                       <Input
                         key={campo}
                         label={campo}
-                        value={paciente[campo.toLowerCase()]}
+                        value={paciente[campo]}
                         onChange={handleInputChange}
                       />
                     ))}
