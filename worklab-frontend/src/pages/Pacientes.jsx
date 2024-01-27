@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styles } from '../utils/styles'
 
+import axiosClient from "../axios";
+
 const Pacientes = () => {
   const navigateTo = useNavigate()
+  const [pacientes, setPacientes] = useState([]) // Estado para armazenar os pacientes
 
   const handleVoltarParaMenu = () => navigateTo('/')
   const handleCadastrarPaciente = () => navigateTo('/cadastrar/paciente')
+
+  useEffect(() => {
+    // UseEffect para buscar dados de pacientes ao montar o componente
+    axiosClient.get('/pacientes')
+      .then(response => {
+        setPacientes(response.data)
+      })
+      .catch(error => {
+        console.error('Erro ao obter lista de pacientes:', error)
+      })
+  }, [])
 
   return (
     <div>
@@ -37,30 +51,34 @@ const Pacientes = () => {
               <thead>
                 <tr>
                   <th scope="col" className="px-6 py-3">
-                      Atendimento
+                     Numero Atendimento
                   </th>
                   <th scope="col" className="px-6 py-3">
                       Paciente
                   </th>
                   <th scope="col" className="px-6 py-3">
-                      <span className="sr-only">Editar</span>
+                      <span className="sr-only">ver</span>
                   </th>
                 </tr>
               </thead>
             <tbody>
-              <tr className="bg-white hover:bg-gray-50">
-                <td scope="row" className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
-                  1234
-                </td>
-                <td className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
-                  Paulo teste paciente
-                </td>
-                <td className="px-6 py-4 text-right">
-                  <a href="#" className="font-medium text-blue-600 hover:underline">
-                    Editar
-                  </a>
-                </td>
-              </tr>
+              {/* Mapeia os pacientes e cria linhas na tabela para cada um */}
+              {pacientes.map((paciente) => (
+                <tr key={paciente.numero_atendimento} className="bg-white hover:bg-gray-50">
+                  <td scope="row" className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
+                    {paciente.numero_atendimento}
+                  </td>
+                  <td className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
+                    {paciente.nome_completo}
+                  </td>
+                  <td className="px-6 py-4 text-right">
+                    <a href="#" className="font-medium text-blue-600 hover:underline">
+                      Editar
+                    </a>
+                  </td>
+                </tr>
+              ))}
+              
             </tbody>
           </table>
         </div>

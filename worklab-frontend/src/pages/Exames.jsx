@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styles } from '../utils/styles'
 
+import axiosClient from "../axios";
+
 export default function Exames() {
   const navigateTo = useNavigate()
+  const [exames, setExames] = useState([]) // Estado para armazenar os exames
 
   const handleVoltarParaMenu = () => navigateTo('/')
   const handleCadastrarExame = () => navigateTo('/cadastrar/exame')
+
+  useEffect(()=> {
+    axiosClient.get('/exames')
+    .then(response => {
+      setExames(response.data)
+    })
+    .catch(error => {
+      console.error('Erro ao obter lista de exames:', error)
+    })
+  }, [])
 
   
   return (
@@ -50,19 +63,22 @@ export default function Exames() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white hover:bg-gray-50">
-                  <td scope="row" className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
-                    1234
-                  </td>
-                  <td className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
-                    Hemo
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <a href="#" className="font-medium text-blue-600 hover:underline">
-                      Editar
-                    </a>
-                  </td>
-                </tr>
+                {exames.map((exame) => (
+                  <tr key={exame.codigo} className="bg-white hover:bg-gray-50">
+                    <td scope="row" className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
+                      {exame.codigo}
+                    </td>
+                    <td className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
+                      {exame.descricao}
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <a href="#" className="font-medium text-blue-600 hover:underline">
+                        Editar
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+                
               </tbody>
             </table>
           </div>
