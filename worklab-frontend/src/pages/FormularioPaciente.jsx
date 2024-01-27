@@ -1,12 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import axiosClient from "../axios";
 import { useState } from "react";
 import NavBar from "../components/NavBar";
 import { styles } from '../utils/styles'
+import ButtonsDefault from "../components/ButtonsDefault";
 
 const FormularioPaciente = () => {
-  const navigateTo = useNavigate()
   const [ loading, setLoading ] = useState(false)
   const [paciente, setPaciente] = useState({
     nome_completo: "",
@@ -14,8 +13,6 @@ const FormularioPaciente = () => {
     celular: "",
     sexo: "M"
   })
-
-  const handleCancelar = () => navigateTo('/')
 
   const handleInputChange = (campo, valor) => {
     setPaciente((prevPaciente) => ({...prevPaciente, [campo]: valor}))
@@ -93,21 +90,7 @@ const FormularioPaciente = () => {
 
 
               {/* buttons */}
-              <div className="mt-6 flex items-center justify-end gap-x-6">
-                <button
-                  type="button"
-                  onClick={handleCancelar}
-                  className="text-sm font-semibold leading-6 text-gray-900  hover:bg-indigo-500 "
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="submit"
-                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  { loading ? 'Salvando...' : 'Salvar' }
-                </button>
-              </div>
+              <ButtonsDefault loading={loading} />
 
             </div>
           </div>
