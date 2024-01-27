@@ -4,6 +4,7 @@ import { NavLink, useLocation  } from "react-router-dom";
 const navigation = [
   { name: "Paciente", to: "/pacientes" },
   { name: "Exame", to: "/exames" },
+  { name: "Relatorio", to: "/relatorio" },
 ]
 
 export default function Menu() {

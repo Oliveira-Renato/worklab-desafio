@@ -73,7 +73,7 @@ const Pacientes = () => {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <a href="#" className="font-medium text-blue-600 hover:underline">
-                      Editar
+                      Visualizar
                     </a>
                   </td>
                 </tr>
