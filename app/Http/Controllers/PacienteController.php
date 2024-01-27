@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class PacienteController extends Controller
 {
@@ -38,4 +40,12 @@ class PacienteController extends Controller
         $paciente->delete();
         return response()->json(null, 204);
     }
+
+    public function ultimoNumeroAtendimento()
+    {
+        $ultimoNumeroAtendimento = DB::table('pacientes')->latest('numero_atendimento')->value('numero_atendimento');
+
+        return response()->json($ultimoNumeroAtendimento);
+    }
+
 }

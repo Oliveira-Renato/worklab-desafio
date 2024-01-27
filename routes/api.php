@@ -27,3 +27,5 @@ Route::resource('pacientes', PacienteController::class);
 Route::resource('exames', ExameController::class);
 //Paciente Exames
 Route::post('/paciente/{numero_atendimento}/exame/{codigo}', [PacienteExameController::class, 'vincularExame']);
+//Retorna ultimo numero de atendimento
+Route::get('/paciente/ultimo-numero-atendimento', [PacienteController::class, 'ultimoNumeroAtendimento']);
