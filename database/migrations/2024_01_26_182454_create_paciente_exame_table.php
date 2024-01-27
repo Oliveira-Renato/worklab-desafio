@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::create('paciente_exame', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('paciente_numero_atendimento');
+            $table->bigInteger('paciente_numero_atendimento');
             $table->string('exame_codigo');
             $table->timestamps();
 

@@ -10,8 +10,8 @@ class PacienteController extends Controller
     //
     public function index()
     {
-        $pacientes = Paciente::with('exames')->get();
-        return response()->json($pacientes);
+        $paciente = Paciente::with('exames')->get();
+        return response()->json($paciente);
     }
     public function store(Request $request)
     {
@@ -19,22 +19,22 @@ class PacienteController extends Controller
         return response()->json($paciente, 201);
     }
 
-    public function show($id)
+    public function show($numeroAtendimento)
     {
-        $paciente = Paciente::findOrFail($id);
+        $paciente = Paciente::where('numero_atendimento', $numeroAtendimento)->first();
         return response()->json($paciente);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $numeroAtendimento)
     {
-        $paciente = Paciente::findOrFail($id);
+        $paciente = Paciente::findOrFail($numeroAtendimento);
         $paciente->update($request->all());
         return response()->json($paciente, 200);
     }
 
-    public function destroy($id)
+    public function destroy($numeroAtendimento)
     {
-        $paciente = Paciente::findOrFail($id);
+        $paciente = Paciente::findOrFail($numeroAtendimento);
         $paciente->delete();
         return response()->json(null, 204);
     }
