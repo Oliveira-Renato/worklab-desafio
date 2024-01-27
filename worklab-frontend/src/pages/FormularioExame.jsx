@@ -12,7 +12,6 @@ const FormularioExame = () => {
     codigo: "",
     descricao: "",
     valor: "",
-    paciente_numero_atendimento: ""
   })
 
   const handleCancelar = () => navigateTo('/')
@@ -33,7 +32,6 @@ const FormularioExame = () => {
         codigo: "",
         descricao: "",
         valor: "",
-        paciente_numero_atendimento: ""
       })
 
       setLoading(false)
@@ -61,7 +59,7 @@ const FormularioExame = () => {
                   <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                      {/* Renderização  dinamica de inputs */}
-                      {['codigo','descricao', 'valor', 'paciente_numero_atendimento'].map((campo) => (
+                      {['codigo','descricao', 'valor'].map((campo) => (
                         <Input
                           key={campo}
                           label={campo}
