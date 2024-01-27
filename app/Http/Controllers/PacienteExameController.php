@@ -21,10 +21,7 @@ class PacienteExameController extends Controller
             return response()->json(['error' => 'Exame não encontrado'], 404);
         }
 
-        $paciente->exames()->attach($exame->id, [
-            'paciente_numero_atendimento' => $paciente->numero_atendimento,
-            'exame_codigo' => $exame->codigo,
-        ]);
+        $paciente->exames()->attach($exame->id);
 
         return response()->json(['message' => 'Exame vinculado com sucesso'], 200);
     }
