@@ -1,6 +1,6 @@
 import Input from "../components/Input";
 import axiosClient from "../axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import { styles } from '../utils/styles'
 import ButtonsDefault from "../components/ButtonsDefault";
@@ -17,15 +17,16 @@ const FormularioPaciente = () => {
 
   useEffect(() => {
     // Realiza uma requisição para obter o último valor da coluna numero_atendimento
-    axiosClient.get('/api/pacientes/ultimo-numero-atendimento')
+    axiosClient.get('/paciente/ultimo-numero-atendimento')
       .then(response => {
         // Define o próximo valor para numero_atendimento (último valor + 1)
+        console.log(response.data)
         setPaciente(prevPaciente => ({ ...prevPaciente, numero_atendimento: response.data + 1 }));
       })
       .catch(error => {
         console.error('Erro ao obter o último número de atendimento:', error);
       });
-  }, []); // O segundo parâmetro do useEffect (um array vazio) garante que a requisição só seja feita uma vez, quando o componente é montado.
+  }, [loading]);
 
   const handleInputChange = (campo, valor) => {
     setPaciente((prevPaciente) => ({...prevPaciente, [campo]: valor}))
