@@ -1,11 +1,18 @@
-import Input from "../components/Input";
-import axiosClient from "../axios";
+// Importa hooks necessários e estilos
 import { useEffect, useState } from "react";
-import NavBar from "../components/NavBar";
 import { styles } from '../utils/styles'
+
+// Importa instância do cliente Axios personalizada
+import axiosClient from "../axios";
+
+// Importa componentes
+import Input from "../components/Input";
+import NavBar from "../components/NavBar";
 import ButtonsDefault from "../components/ButtonsDefault";
 
+// Componente principal FormularioPaciente
 const FormularioPaciente = () => {
+  // Estados para controlar o formulário e a carga
   const [ loading, setLoading ] = useState(false)
   const [paciente, setPaciente] = useState({
     nome_completo: "",
@@ -15,8 +22,8 @@ const FormularioPaciente = () => {
     numero_atendimento: null,
   })
 
+  // Realiza uma requisição para obter o último valor da coluna numero_atendimento
   useEffect(() => {
-    // Realiza uma requisição para obter o último valor da coluna numero_atendimento
     axiosClient.get('/paciente/ultimo-numero-atendimento')
       .then(response => {
         const ultimoNumeroAtendimento = response.data;
@@ -29,15 +36,17 @@ const FormularioPaciente = () => {
       });
   }, [loading]);
 
+  // Função para manipular mudanças nos inputs do formulário
   const handleInputChange = (campo, valor) => {
     setPaciente((prevPaciente) => ({...prevPaciente, [campo]: valor}))
   }
 
+  // Função para lidar com o envio do formulário
   const handleSalvar = (e) => {
     e.preventDefault()
     setLoading(true)
 
-    //enviar para backend
+    // Envia dados para o backend
     axiosClient.post('/pacientes', paciente)
     .then(response => {
       console.log('Paciente cadastrado com sucesso', paciente.data)
@@ -56,19 +65,24 @@ const FormularioPaciente = () => {
     })
   }
   
+  // Renderiza a estrutura do componente
   return (
     <>
+      {/* Barra de navegação */}
       <NavBar />
+
+      {/* Formulário */}
       <form onSubmit={handleSalvar}>
         <div className="space-y-12 m-auto">
           <div className="border-b border-gray-900/10 pb-12">
             
+            {/* Cabeçalho do formulário */}
             <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
               <h2 className="text-3xl font-bold mb-2">Cadastro de Pacientes</h2>
               <p className="text-lg">Registre novos pacientes para manter um histórico clínico detalhado.</p>
             </div>  
 
-          
+            {/* Corpo do formulário */}
             <div className={`${styles.padding} w-full`}>
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 {/* Renderização  dinamica de inputs */}
@@ -81,7 +95,7 @@ const FormularioPaciente = () => {
                   />
                 ))}
 
-                {/* input select */}
+                {/* Input select para o campo 'sexo' */}
                 <div className="sm:col-span-3">
                   <label htmlFor="sexo" className="block text-sm font-medium leading-6 text-gray-900">
                     Sexo
@@ -100,13 +114,10 @@ const FormularioPaciente = () => {
                     </select>
                   </div>
                 </div>
-
               </div>
 
-
-              {/* buttons */}
+              {/* Botões de salvar/cancelar */}
               <ButtonsDefault loading={loading} />
-
             </div>
           </div>
         </div>
