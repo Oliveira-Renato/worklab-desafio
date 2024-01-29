@@ -9,12 +9,14 @@ const Relatorio = () => {
   const [relatorio, setRelatorio] = useState(null);
 
   const handleNumeroAtendimentoChange = (e) => {
-    setNumeroAtendimento(e.target.value);
+    let numeroAtendimento = Number(e.target.value);
+    numeroAtendimento ? setNumeroAtendimento(numeroAtendimento) : setNumeroAtendimento('')
   };
 
   const handleBuscarRelatorio = () => {
     // Realize uma requisição para obter o relatório com base no número de atendimento
-    axiosClient.get(`/pacientes/${numeroAtendimento}`)
+    if(numeroAtendimento) {
+      axiosClient.get(`/pacientes/${numeroAtendimento}`)
       .then(response => {
         setRelatorio(response.data);
         console.log(relatorio)
@@ -23,6 +25,10 @@ const Relatorio = () => {
         console.error('Erro ao buscar relatório:', error);
         setRelatorio(null);
       });
+    } else {
+      console.log('Número de atendimento do paciente não informado')
+    }
+    
   };
   console.log(relatorio)
 
@@ -80,7 +86,7 @@ const Relatorio = () => {
             </div>
             <hr />
             <h4 className="text-xl font-bold mb-2">Exames</h4>
-            { relatorio.exames.length > 0 ? (
+            { relatorio.exames  ? (
               <table>
               <thead>
                 <tr>
