@@ -14,9 +14,9 @@ return new class extends Migration {
     {
         Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_atendimento')->unique()->default(mt_rand(1, 9999));
+            $table->bigInteger('numero_atendimento')->unique();
             $table->string('nome_completo');
-            $table->string('sexo');
+            $table->string('sexo')->nullable();
             $table->string('email')->nullable();
             $table->string('celular')->nullable();
             $table->timestamps();

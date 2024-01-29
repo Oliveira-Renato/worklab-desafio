@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PacienteExameController;
 use App\Http\Controllers\ExameController;
 use App\Http\Controllers\PacienteController;
 use Illuminate\Http\Request;
@@ -24,3 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('pacientes', PacienteController::class);
 //Exames
 Route::resource('exames', ExameController::class);
+//Paciente Exames
+Route::post('/paciente/{numero_atendimento}/exame/{codigo}', [PacienteExameController::class, 'vincularExame']);
+//Retorna ultimo numero de atendimento
+Route::get('/paciente/ultimo-numero-atendimento', [PacienteController::class, 'ultimoNumeroAtendimento']);
