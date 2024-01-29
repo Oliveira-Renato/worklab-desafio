@@ -23,7 +23,7 @@ class PacienteController extends Controller
 
     public function show($numeroAtendimento)
     {
-        $paciente = Paciente::where('numero_atendimento', $numeroAtendimento)->first();
+        $paciente = Paciente::with('exames')->where('numero_atendimento', $numeroAtendimento)->first();
         return response()->json($paciente);
     }
 
