@@ -39,14 +39,14 @@ const Pacientes = () => {
 
       {/* Área central da página */}
       <div className={`${styles.padding}`} >
-        <div className={` flex justify-between m-auto`} >
+        <div className={` flex justify-between my-2`} >
           {/* Botão para voltar ao menu */}
           <ButtonBackMenu />
 
           {/* Botão para cadastrar novo paciente */}
           <button
             onClick={handleCadastrarPaciente}
-            className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm my-2"
+            className="rounded-md bg-indigo-500 text-[16px] font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-2 md:px-20 sm:px-12"
           >
             Cadastrar Paciente
           </button>

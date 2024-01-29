@@ -68,13 +68,13 @@ const VincularExame = () => {
       <NavBar />
       <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
         <h2 className="text-3xl font-bold mb-2">Vincular Exame</h2>
-        <p className="text-lg">Registre a associação de exames aos pacientes para manter um histórico preciso.</p>
+        <p className="md:text-lg sm:text-sm">Registre a associação de exames aos pacientes para manter um histórico preciso.</p>
       </div>
 
       {/* Renderiza a seção de cabeçalho */}
       <div className="flex flex-col items-center justify-center">
         {/* Renderiza o formulário de vinculação de exame */}
-        <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 align-middle'>
+        <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-6 align-middle'>
           <div className="sm:col-span-3 flex flex-col">
             <label htmlFor="numeroAtendimento" className="mb-2">
               Número de Atendimento:
@@ -91,7 +91,7 @@ const VincularExame = () => {
             
           {/* Dropdown para seleção de exame */}
           <div className="sm:col-span-3">
-            <label htmlFor="exame" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="exame" className="mb-2">
               Exame
             </label>
             <div className="mt-2">
@@ -114,20 +114,20 @@ const VincularExame = () => {
         </div>
         
       {/* Botões para navegação e vinculação de exame */}         
-       <div className='flex flex-wrap items-center gap-4 m-auto'>
+       <div className='flex flex-wrap items-center justify-center gap-4 mt-8'>
         {/* Botão para voltar ao menu */}
         <ButtonBackMenu />
 
         {/* Botão para vincular exame */}
         <button
           onClick={handleVincularExame}
-          className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm "
+          className="rounded-md bg-indigo-500 text-[16px] font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-2 px-14"
         >
           
           { loading ? 'Vinculando...' : 'Vincular Exame' }
         </button>
        </div>
-
+       
       </div>
     </>
   );

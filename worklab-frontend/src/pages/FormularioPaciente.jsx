@@ -117,7 +117,9 @@ const FormularioPaciente = () => {
               </div>
 
               {/* Botões de salvar/cancelar */}
+             <div className="mx-9">
               <ButtonsDefault loading={loading} />
+             </div>
             </div>
           </div>
         </div>

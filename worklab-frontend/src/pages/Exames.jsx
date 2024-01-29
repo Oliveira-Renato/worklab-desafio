@@ -5,6 +5,8 @@ import { styles } from '../utils/styles'
 
 // Importa instância do cliente Axios personalizada
 import axiosClient from "../axios";
+// Importa componente ButtonBackMenu
+import ButtonBackMenu from "../components/ButtonBackMenu";
 
 // Componente funcional Exames
 export default function Exames() {
@@ -40,17 +42,11 @@ export default function Exames() {
        {/* Corpo da página */}
       <div className={`${styles.padding}`}>
         {/* Botões de navegação */}
-        <div className="flex justify-between m-auto">
-            <button
-              className="bg-tertiary px-4 py-2 text-secondary hover:bg-primary rounded-sm my-2"
-              onClick={handleVoltarParaMenu}
-            >
-              Voltar
-            </button>
-
+        <div className="flex justify-between my-2">
+            <ButtonBackMenu />
             <button
               onClick={handleCadastrarExame}
-              className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm my-2"
+              className="rounded-md bg-indigo-500 text-[16px] font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-2 md:px-20 sm:px-12"
             >
               Cadastrar Exame
             </button>

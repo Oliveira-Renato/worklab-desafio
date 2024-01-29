@@ -4,10 +4,10 @@ import { NavLink, useLocation  } from "react-router-dom";
 
 // Define as opções de navegação
 const navigation = [
-  { name: "Paciente", to: "/pacientes", color: "#3498DB" },
-  { name: "Exame", to: "/exames", color: "#2ECC71" },
-  { name: "Vincular Exame", to: "/vincular_exame", color: "#f56565"},
-  { name: "Relatorio", to: "/relatorio", color: "#667eea" },
+  { name: "Paciente", to: "/pacientes", color: "bg-[#3498DB]" },
+  { name: "Exame", to: "/exames", color: "bg-[#2ECC71]" },
+  { name: "Vincular Exame", to: "/vincular_exame", color: "bg-[#f56565]"},
+  { name: "Relatorio", to: "/relatorio", color: "bg-[#667eea]" },
 ]
 
 // Componente Menu
@@ -33,7 +33,7 @@ export default function Menu() {
           <NavLink
             key={item.name}
             to={item.to}
-            className={`text-white font-medium cursor-pointer text-[20px] hover:bg-primary bg-[${item.color}] w-[160px] h-[160px] rounded-r-sm flex items-center justify-center`}
+            className={`text-white font-medium cursor-pointer text-[20px] hover:bg-primary ${item.color} w-[160px] h-[160px]  flex items-center justify-center rounded-md`}
           >
            {item.name}
           </NavLink>

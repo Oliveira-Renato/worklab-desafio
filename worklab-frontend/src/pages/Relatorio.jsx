@@ -46,7 +46,7 @@ const Relatorio = () => {
        {/* Renderiza a seção de cabeçalho */}
       <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
         <h2 className="text-3xl font-bold mb-2">Gerar Relatorio</h2>
-        <p className="text-lg"> obtenha informações detalhadas sobre pacientes e exames para uma análise abrangente.</p>
+        <p className="sm:text-sm md:text-lg  "> obtenha informações detalhadas sobre pacientes e exames para uma análise abrangente.</p>
       </div>
 
       {/* Renderiza o formulário de busca de relatório */}
@@ -65,14 +65,14 @@ const Relatorio = () => {
         />
 
         {/* Botões para navegação e busca de relatório */}
-       <div className='flex flex-wrap items-center gap-4 m-auto'>
+       <div className='flex flex-wrap items-center gap-4 m-auto justify-center'>
         {/* Botão para voltar ao menu */}
         <ButtonBackMenu />
 
         {/* Botão para buscar relatório */}
         <button
           onClick={handleBuscarRelatorio}
-          className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm"
+          className="rounded-md bg-indigo-500 text-[16px] font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-2 px-14"
         >
           Buscar Relatório
         </button>
