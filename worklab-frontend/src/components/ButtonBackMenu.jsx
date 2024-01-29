@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
+// Componente funcional ButtonBackMenu
 const ButtonBackMenu = () => {
-  const handleVoltarParaMenu = () => navigateTo('/')
   const navigateTo = useNavigate()
-
+  // Função para navegar de volta à página inicial
+  const handleVoltarParaMenu = () => navigateTo('/')
 
   return (
     <button
