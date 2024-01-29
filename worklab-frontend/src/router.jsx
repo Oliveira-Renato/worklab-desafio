@@ -5,6 +5,7 @@ import Pacientes from './pages/Pacientes'
 import Exames from './pages/Exames'
 import FormularioPaciente from './pages/FormularioPaciente'
 import FormularioExame from './pages/FormularioExame'
+import Relatorio from './pages/Relatorio'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: 'cadastrar/exame',
     element: <FormularioExame />
+  },
+  {
+    path: 'relatorio',
+    element: <Relatorio />
   }
 ])
 
