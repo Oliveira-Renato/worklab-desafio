@@ -15,11 +15,11 @@ return new class extends Migration {
         Schema::create('paciente_exame', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('paciente_numero_atendimento');
-            $table->string('exame_codigo');
+            $table->bigInteger('exame_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('paciente_numero_atendimento')->references('numero_atendimento')->on('pacientes');
-            $table->foreign('exame_codigo')->references('codigo')->on('exames');
+            $table->foreign('exame_id')->references('id')->on('exames');
         });
     }
 
