@@ -1,25 +1,30 @@
+// Importa o hook useState do React
 import { useState } from 'react';
+// Importa a instância do cliente Axios personalizada
 import axiosClient from "../axios";
 
+// Importa componentes necessários
 import NavBar from "../components/NavBar";
 import ButtonBackMenu from '../components/ButtonBackMenu';
 
+// Componente principal Relatorio
 const Relatorio = () => {
+   // Estados para controlar dados do formulário e resultados do relatório
   const [numeroAtendimento, setNumeroAtendimento] = useState('');
   const [relatorio, setRelatorio] = useState(null);
 
+  // Manipula a mudança no número de atendimento
   const handleNumeroAtendimentoChange = (e) => {
     let numeroAtendimento = Number(e.target.value);
     numeroAtendimento ? setNumeroAtendimento(numeroAtendimento) : setNumeroAtendimento('')
   };
 
+  // Realiza uma requisição para obter o relatório com base no número de atendimento
   const handleBuscarRelatorio = () => {
-    // Realize uma requisição para obter o relatório com base no número de atendimento
     if(numeroAtendimento) {
       axiosClient.get(`/pacientes/${numeroAtendimento}`)
       .then(response => {
         setRelatorio(response.data);
-        console.log(relatorio)
       })
       .catch(error => {
         console.error('Erro ao buscar relatório:', error);
@@ -30,17 +35,22 @@ const Relatorio = () => {
     }
     
   };
-  console.log(relatorio)
 
+  // Renderiza a estrutura do componente
   return (
     <>
+     {/* Renderiza a barra de navegação */}
       <NavBar />
+
+       {/* Renderiza a seção de cabeçalho */}
       <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
         <h2 className="text-3xl font-bold mb-2">Gerar Relatorio</h2>
         <p className="text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>
 
+      {/* Renderiza o formulário de busca de relatório */}
       <div className="flex flex-col items-center">
+        {/* Input para número de atendimento */}
         <label htmlFor="numeroAtendimento" className="mb-2">
           Número de Atendimento:
         </label>
@@ -53,9 +63,12 @@ const Relatorio = () => {
           className="border p-2 mb-4"
         />
 
+      {/* Botões para navegação e busca de relatório */}
        <div className='flex flex-wrap items-center gap-4 m-auto'>
+        {/* Botão para voltar ao menu */}
         <ButtonBackMenu />
 
+        {/* Botão para buscar relatório */}
         <button
           onClick={handleBuscarRelatorio}
           className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm "
@@ -64,6 +77,7 @@ const Relatorio = () => {
         </button>
        </div>
 
+        {/* Condição para exibir o relatório se existir */}
         {relatorio && (
           <div className="mt-4 bg-white p-6 rounded-md shadow-md">
             {/* Exiba as informações do relatório conforme necessário */}
@@ -86,6 +100,8 @@ const Relatorio = () => {
             </div>
             <hr />
             <h4 className="text-xl font-bold mb-2">Exames</h4>
+
+            {/* Condição para exibir os exames ou uma mensagem se não houver exames vinculados */}
             { relatorio.exames.length  ? (
               <table>
               <thead>
