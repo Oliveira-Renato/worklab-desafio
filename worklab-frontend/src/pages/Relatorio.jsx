@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axiosClient from "../axios";
 
 import NavBar from "../components/NavBar";
+import ButtonBackMenu from '../components/ButtonBackMenu';
 
 const Relatorio = () => {
   const [numeroAtendimento, setNumeroAtendimento] = useState('');
@@ -46,12 +47,16 @@ const Relatorio = () => {
           className="border p-2 mb-4"
         />
 
+       <div className='flex flex-wrap items-center gap-4 m-auto'>
+        <ButtonBackMenu />
+
         <button
           onClick={handleBuscarRelatorio}
-          className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm"
+          className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm "
         >
           Buscar Relatório
         </button>
+       </div>
 
         {relatorio && (
           <div className="mt-4 bg-white p-6 rounded-md shadow-md">

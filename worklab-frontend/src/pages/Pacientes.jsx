@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { styles } from '../utils/styles'
 
 import axiosClient from "../axios";
+import ButtonBackMenu from "../components/ButtonBackMenu";
 
 const Pacientes = () => {
   const navigateTo = useNavigate()
   const [pacientes, setPacientes] = useState([]) // Estado para armazenar os pacientes
 
-  const handleVoltarParaMenu = () => navigateTo('/')
   const handleCadastrarPaciente = () => navigateTo('/cadastrar/paciente')
 
   useEffect(() => {
@@ -31,13 +31,7 @@ const Pacientes = () => {
 
       <div className={`${styles.padding}`} >
         <div className={` flex justify-between m-auto`} >
-          <button
-            className="bg-tertiary px-4 py-2 text-secondary hover:bg-primary rounded-sm my-2"
-            onClick={handleVoltarParaMenu}
-          >
-            Voltar
-          </button>
-
+          <ButtonBackMenu />
           <button
             onClick={handleCadastrarPaciente}
             className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm my-2"
