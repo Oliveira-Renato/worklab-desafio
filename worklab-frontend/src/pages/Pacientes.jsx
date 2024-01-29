@@ -1,18 +1,24 @@
+// Importa React, hooks necessários e estilos
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styles } from '../utils/styles'
 
+// Importa instância do cliente Axios personalizada
 import axiosClient from "../axios";
+// Importa componente ButtonBackMenu
 import ButtonBackMenu from "../components/ButtonBackMenu";
 
+// Componente principal Pacientes
 const Pacientes = () => {
+  // Hook de navegação do React Router
   const navigateTo = useNavigate()
-  const [pacientes, setPacientes] = useState([]) // Estado para armazenar os pacientes
-
+  // Estado para armazenar os pacientes
+  const [pacientes, setPacientes] = useState([]) 
+ // Função para navegar até a página de cadastro de paciente
   const handleCadastrarPaciente = () => navigateTo('/cadastrar/paciente')
 
+  // Efeito para buscar dados de pacientes ao montar o componente
   useEffect(() => {
-    // UseEffect para buscar dados de pacientes ao montar o componente
     axiosClient.get('/pacientes')
       .then(response => {
         setPacientes(response.data)
@@ -22,16 +28,22 @@ const Pacientes = () => {
       })
   }, [])
 
+  // Renderiza a estrutura do componente
   return (
     <div>
+      {/* Cabeçalho da página */}
       <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
         <h2 className="text-3xl font-bold mb-2">Lista de Pacientes</h2>
         <p className="text-lg">Lista de pacientes cadastrados  no sistema.</p>
       </div>  
 
+      {/* Área central da página */}
       <div className={`${styles.padding}`} >
         <div className={` flex justify-between m-auto`} >
+          {/* Botão para voltar ao menu */}
           <ButtonBackMenu />
+
+          {/* Botão para cadastrar novo paciente */}
           <button
             onClick={handleCadastrarPaciente}
             className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm my-2"
@@ -40,6 +52,7 @@ const Pacientes = () => {
           </button>
         </div>
 
+         {/* Tabela de pacientes */}
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-50 bg-slate-600">
               <thead>
@@ -72,11 +85,9 @@ const Pacientes = () => {
                   </td>
                 </tr>
               ))}
-              
             </tbody>
           </table>
         </div>
-        
       </div>
     </div>
   );
