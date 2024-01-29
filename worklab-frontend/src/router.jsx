@@ -6,6 +6,7 @@ import Exames from './pages/Exames'
 import FormularioPaciente from './pages/FormularioPaciente'
 import FormularioExame from './pages/FormularioExame'
 import Relatorio from './pages/Relatorio'
+import VincularExame from './pages/VincularExame'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: 'relatorio',
     element: <Relatorio />
+  },
+  {
+    path: 'vincular_exame',
+    element: <VincularExame />
   }
 ])
 
