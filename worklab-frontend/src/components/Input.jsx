@@ -1,10 +1,13 @@
+// Componente funcional Input
 const Input = ({label, value, onChange}) => {
   return (
     <div className="sm:col-span-3">
+      {/* Rótulo do input */}
       <label htmlFor={label} className="block text-sm font-medium leading-6 text-gray-900">
         {label}
       </label>
       <div className="mt-2">
+        {/* Input controlado com propriedades value e onChange */}
         <input
           id={label}
           name={label}
