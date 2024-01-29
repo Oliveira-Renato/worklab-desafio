@@ -43,18 +43,28 @@ Bem-vindo à minha versão do sistema Worklab! Neste projeto, busco criar uma ve
 
 1. **Clonar o Repositório:**
    - Clone o repositório do seu projeto para o seu ambiente local.
-
+   - `git clone https://github.com/Oliveira-Renato/worklab-desafio.git`
 2. **Instalar Dependências PHP:**
+   - Execute `cd worklab-desafio` para entrar no diretório clonado.
    - Execute `composer install` no diretório do projeto para instalar as dependências PHP.
+   - Execute `cp .env.example .env` para fazer uma copia do arquivo de exemplo para um .env .
+   - Execute `php artisan key:generate` para gerar uma chave de seguraça para o projeto.
 
 3. **Instalar Dependências Node.js:**
+   - Execute `cd worklab-frontend` para entrar no diretório onde se encontra o frontend da apliação.
    - Execute `npm install` ou `yarn install` no diretório do projeto para instalar as dependências do Node.js.
+   - Crie um arquivo *.env* na raiz do projeto frontend e preencha com a seguinte informação:
+     * VITE_API_BASE_URL=http://localhost:8000 //ou porta que sua API estejá rodando.
 
 4. **Configurar o Banco de Dados:**
    - Certifique-se de que o servidor MySQL no XAMPP esteja em execução.
-   - Configure as informações do banco de dados no arquivo de configuração do seu projeto.
+   - Configure as informações do banco de dados no arquivo de configuração do seu projeto *.env.example ou .env*.
+   - No *phpMyAdmin*, crie uma tabela chamada **"worklab_desafio"**
 
 5. **Executar a Aplicação:**
+   - Após ter feito todos os passos anteriores, dentro do diretório "worklab-desafio":
+   * Execute `php artisan migrate` para criar as tabelas, e em seguida `php artisan serve` para iniciar o servidor backend.
+   - Dentro do diretório "worklab-frontend":
    - Execute `npm run dev` ou `yarn dev` para iniciar o servidor de desenvolvimento Vite + React.
    - Acesse a aplicação pelo navegador através do endereço local.
 
