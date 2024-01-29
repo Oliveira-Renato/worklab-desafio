@@ -1,28 +1,37 @@
+// Importa hooks do React
 import { useEffect, useState } from 'react';
+// Importa instância do cliente Axios personalizada
 import axiosClient from "../axios";
 
+// Importa componentes necessários
 import NavBar from "../components/NavBar";
 import ButtonBackMenu from '../components/ButtonBackMenu';
 
+// Componente principal VincularExame
 const VincularExame = () => {
+  // Estados para controlar dados do formulário e estado de carregamento
   const [numeroAtendimento, setNumeroAtendimento] = useState('');
   const [exames, setExames] = useState([]);
   const [exameSelecionado, setExameSelecionado] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Manipula a mudança no número de atendimento
   const handleNumeroAtendimentoChange = (e) => {
     let numeroAtendimento = Number(e.target.value);
     numeroAtendimento ? setNumeroAtendimento(numeroAtendimento) : setNumeroAtendimento('')
   };
 
+  // Manipula a seleção de um exame
   const handleExame = (e) =>  {
     setExameSelecionado(e.target.value);
   }
 
+   // Manipula o evento de vinculação do exame
   const handleVincularExame = () => {
     setLoading(true)
 
     if (numeroAtendimento && exameSelecionado) {
+      // Faz uma requisição POST para vincular exame ao paciente
       axiosClient.post(`/paciente/${numeroAtendimento}/exame/${exameSelecionado}`)
         .then(response => {
           console.log('Exame vinculado com sucesso');
@@ -41,8 +50,8 @@ const VincularExame = () => {
     }
   };
 
+  // Efeito para buscar exames cadastrados ao carregar o componente
   useEffect(() => {
-    // Buscar exames cadastrados ao carregar o componente
     axiosClient.get('/exames')
       .then(response => {
         setExames(response.data);
@@ -52,16 +61,19 @@ const VincularExame = () => {
       });
   }, []);
 
+  // Renderiza a estrutura do componente
   return (
     <>
+      {/* Renderiza a barra de navegação */}
       <NavBar />
       <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
         <h2 className="text-3xl font-bold mb-2">Vincular Exame</h2>
         <p className="text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>
 
+      {/* Renderiza a seção de cabeçalho */}
       <div className="flex flex-col items-center justify-center">
-
+        {/* Renderiza o formulário de vinculação de exame */}
         <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 align-middle'>
           <div className="sm:col-span-3 flex flex-col">
             <label htmlFor="numeroAtendimento" className="mb-2">
@@ -77,6 +89,7 @@ const VincularExame = () => {
             />
           </div>
             
+          {/* Dropdown para seleção de exame */}
           <div className="sm:col-span-3">
             <label htmlFor="exame" className="block text-sm font-medium leading-6 text-gray-900">
               Exame
@@ -100,11 +113,12 @@ const VincularExame = () => {
           </div>
         </div>
         
-
-
+      {/* Botões para navegação e vinculação de exame */}         
        <div className='flex flex-wrap items-center gap-4 m-auto'>
+        {/* Botão para voltar ao menu */}
         <ButtonBackMenu />
 
+        {/* Botão para vincular exame */}
         <button
           onClick={handleVincularExame}
           className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm "
