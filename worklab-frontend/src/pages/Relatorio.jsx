@@ -86,7 +86,7 @@ const Relatorio = () => {
             </div>
             <hr />
             <h4 className="text-xl font-bold mb-2">Exames</h4>
-            { relatorio.exames  ? (
+            { relatorio.exames.length  ? (
               <table>
               <thead>
                 <tr>

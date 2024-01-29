@@ -8,6 +8,7 @@ const VincularExame = () => {
   const [numeroAtendimento, setNumeroAtendimento] = useState('');
   const [exames, setExames] = useState([]);
   const [exameSelecionado, setExameSelecionado] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleNumeroAtendimentoChange = (e) => {
     let numeroAtendimento = Number(e.target.value);
@@ -19,13 +20,21 @@ const VincularExame = () => {
   }
 
   const handleVincularExame = () => {
+    setLoading(true)
+
     if (numeroAtendimento && exameSelecionado) {
-      axiosClient.post(`/pacientes/${numeroAtendimento}/exame/${exameSelecionado}`)
+      axiosClient.post(`/paciente/${numeroAtendimento}/exame/${exameSelecionado}`)
         .then(response => {
           console.log('Exame vinculado com sucesso');
+          setNumeroAtendimento('')
+          setExameSelecionado('');
+          setLoading(false)
         })
         .catch(error => {
           console.error('Erro ao vincular exame:', error);
+          setNumeroAtendimento('')
+          setExameSelecionado('');
+          setLoading(false)
         });
     } else {
       console.log('Número de atendimento do paciente ou exame não informado');
@@ -100,7 +109,8 @@ const VincularExame = () => {
           onClick={handleVincularExame}
           className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm "
         >
-          Vincular Exame
+          
+          { loading ? 'Vinculando...' : 'Vincular Exame' }
         </button>
        </div>
 
