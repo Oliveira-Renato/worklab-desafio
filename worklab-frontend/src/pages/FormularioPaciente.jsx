@@ -19,9 +19,10 @@ const FormularioPaciente = () => {
     // Realiza uma requisição para obter o último valor da coluna numero_atendimento
     axiosClient.get('/paciente/ultimo-numero-atendimento')
       .then(response => {
-        // Define o próximo valor para numero_atendimento (último valor + 1)
-        console.log(response.data)
-        setPaciente(prevPaciente => ({ ...prevPaciente, numero_atendimento: response.data + 1 }));
+        const ultimoNumeroAtendimento = response.data;
+        const numeroAtendimento = isNaN(ultimoNumeroAtendimento)  ? 1 : ultimoNumeroAtendimento + 1;
+        console.log( numeroAtendimento)
+        setPaciente(prevPaciente => ({ ...prevPaciente, numero_atendimento: numeroAtendimento }))
       })
       .catch(error => {
         console.error('Erro ao obter o último número de atendimento:', error);
