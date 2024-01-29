@@ -80,9 +80,9 @@ const Relatorio = () => {
 
         {/* Condição para exibir o relatório se existir */}
         { Object.keys(relatorio).length  ? (
-          <div className="mt-4 bg-white p-6 rounded-md shadow-md">
+          <div className="mt-4 bg-white p-6 rounded-md shadow-md w-fit">
             {/* Exiba as informações do relatório conforme necessário */}
-            <h3 className="text-xl font-bold mb-2">Relatório do Paciente {numeroAtendimento}</h3>
+            <h3 className="text-xl font-bold mb-2">Relatório do Paciente {relatorio.numero_atendimento}</h3>
             <hr />
             <div className="mb-2">
               <span className="font-bold">Nome Completo:</span> {relatorio.nome_completo}
