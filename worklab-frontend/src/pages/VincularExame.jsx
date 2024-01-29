@@ -68,7 +68,7 @@ const VincularExame = () => {
       <NavBar />
       <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
         <h2 className="text-3xl font-bold mb-2">Vincular Exame</h2>
-        <p className="text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p className="text-lg">Registre a associação de exames aos pacientes para manter um histórico preciso.</p>
       </div>
 
       {/* Renderiza a seção de cabeçalho */}
@@ -85,7 +85,7 @@ const VincularExame = () => {
               name="numeroAtendimento"
               value={numeroAtendimento}
               onChange={handleNumeroAtendimentoChange}
-              className="border p-2 mb-4"
+              className="p-2 mb-4  rounded-md ring-1 border-gray-300  text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 sm:text-sm sm:leading-5 outline-none transition-all duration-300 ease-in-out"
             />
           </div>
             
@@ -98,7 +98,7 @@ const VincularExame = () => {
               <select
                 id="exame"
                 name="exame"
-                className="block w-full rounded-md border-0  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:max-w-xs sm:text-sm sm:leading-6 p-2"
+                className="block w-full  rounded-md ring-1 border-gray-300 p-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 sm:text-sm sm:leading-5 outline-none transition-all duration-300 ease-in-out"
                 value={exameSelecionado}
                 onChange={handleExame}
               >

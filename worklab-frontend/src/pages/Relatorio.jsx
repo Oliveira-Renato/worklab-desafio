@@ -11,7 +11,7 @@ import ButtonBackMenu from '../components/ButtonBackMenu';
 const Relatorio = () => {
    // Estados para controlar dados do formulário e resultados do relatório
   const [numeroAtendimento, setNumeroAtendimento] = useState('');
-  const [relatorio, setRelatorio] = useState(null);
+  const [relatorio, setRelatorio] = useState({});
 
   // Manipula a mudança no número de atendimento
   const handleNumeroAtendimentoChange = (e) => {
@@ -25,10 +25,11 @@ const Relatorio = () => {
       axiosClient.get(`/pacientes/${numeroAtendimento}`)
       .then(response => {
         setRelatorio(response.data);
+        setNumeroAtendimento('')
       })
       .catch(error => {
         console.error('Erro ao buscar relatório:', error);
-        setRelatorio(null);
+        // setRelatorio({});
       });
     } else {
       console.log('Número de atendimento do paciente não informado')
@@ -45,7 +46,7 @@ const Relatorio = () => {
        {/* Renderiza a seção de cabeçalho */}
       <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
         <h2 className="text-3xl font-bold mb-2">Gerar Relatorio</h2>
-        <p className="text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p className="text-lg"> obtenha informações detalhadas sobre pacientes e exames para uma análise abrangente.</p>
       </div>
 
       {/* Renderiza o formulário de busca de relatório */}
@@ -60,10 +61,10 @@ const Relatorio = () => {
           name="numeroAtendimento"
           value={numeroAtendimento}
           onChange={handleNumeroAtendimentoChange}
-          className="border p-2 mb-4"
+          className="p-2 mb-4 rounded-md ring-1 border-gray-300  text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 sm:text-sm sm:leading-5 outline-none transition-all duration-300 ease-in-out"
         />
 
-      {/* Botões para navegação e busca de relatório */}
+        {/* Botões para navegação e busca de relatório */}
        <div className='flex flex-wrap items-center gap-4 m-auto'>
         {/* Botão para voltar ao menu */}
         <ButtonBackMenu />
@@ -71,14 +72,14 @@ const Relatorio = () => {
         {/* Botão para buscar relatório */}
         <button
           onClick={handleBuscarRelatorio}
-          className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm "
+          className="bg-primary px-4 py-2 text-secondary hover:bg-sky-700 rounded-sm"
         >
           Buscar Relatório
         </button>
        </div>
 
         {/* Condição para exibir o relatório se existir */}
-        {relatorio && (
+        { Object.keys(relatorio).length  ? (
           <div className="mt-4 bg-white p-6 rounded-md shadow-md">
             {/* Exiba as informações do relatório conforme necessário */}
             <h3 className="text-xl font-bold mb-2">Relatório do Paciente {numeroAtendimento}</h3>
@@ -102,14 +103,14 @@ const Relatorio = () => {
             <h4 className="text-xl font-bold mb-2">Exames</h4>
 
             {/* Condição para exibir os exames ou uma mensagem se não houver exames vinculados */}
-            { relatorio.exames.length  ? (
+            { Object.keys(relatorio).length ? (
               <table>
-              <thead>
-                <tr>
-                  <th className='text-left'>Descrição</th>
-                  <th>Valor</th>
-                </tr>
-              </thead>
+                <thead>
+                  <tr>
+                    <th className='text-left'>Descrição</th>
+                    <th>Valor</th>
+                  </tr>
+                </thead>
               <tbody>
                 {relatorio.exames.map((exame)=> (
                   <tr key={exame.codigo}>
@@ -125,7 +126,7 @@ const Relatorio = () => {
               </div>
             )}
           </div>
-        )}
+        ): (<></>)}
       </div>
     </>
   );

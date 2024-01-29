@@ -1,5 +1,3 @@
-// Importa hooks necessários e estilos
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { styles } from '../utils/styles'
 
@@ -9,12 +7,10 @@ import axiosClient from "../axios";
 // Importa componentes
 import NavBar from "../components/NavBar";
 import Input from "../components/Input";
+import ButtonsDefault from "../components/ButtonsDefault";
 
 // Componente principal FormularioExame
 const FormularioExame = () => {
-  // Obtém a função de navegação da biblioteca react-router-dom
-  const navigateTo = useNavigate()
-
   // Estados para controlar o formulário e a carga
   const [ loading, setLoading ] = useState(false)
   const [exame, setExame] = useState({
@@ -22,9 +18,6 @@ const FormularioExame = () => {
     descricao: "",
     valor: "",
   })
-
-  // Função para lidar com o cancelamento e retorno à página principal
-  const handleCancelar = () => navigateTo('/')
 
   // Função para manipular mudanças nos inputs do formulário
   const handleInputChange = (campo, valor) => {
@@ -85,22 +78,8 @@ const FormularioExame = () => {
                   ))}
               </div>
 
-              {/* Botões de cancelar e salvar */}
-              <div className="mt-6 flex items-center justify-end gap-x-6">
-                <button
-                  type="button"
-                  onClick={handleCancelar}
-                  className="text-sm font-semibold leading-6 text-gray-900  hover:bg-indigo-500 "
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="submit"
-                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  { loading ? 'Salvando...' : 'Salvar' }
-                </button>
-              </div>
+               {/* Botões de salvar/cancelar */}
+               <ButtonsDefault loading={loading} />
 
             </div>
           </div>

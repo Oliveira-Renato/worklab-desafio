@@ -1,22 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import ButtonBackMenu from "./ButtonBackMenu";
 
 // Componente funcional ButtonsDefault
 const ButtonsDefault = ({loading}) => {
-  const navigateTo = useNavigate()
-
-  // Função para navegar de volta à página inicial
-  const handleCancelar = () => navigateTo('/')
-
   return (
     <div className="mt-6 flex items-center justify-end gap-x-6">
       {/* Botão para cancelar a operação */}
-      <button
-        type="button"
-        onClick={handleCancelar}
-        className="text-sm font-semibold leading-6 text-gray-900  hover:bg-indigo-500 "
-      >
-        Cancelar
-      </button>
+      <ButtonBackMenu />
 
       {/* Botão para enviar o formulário */}
       <button

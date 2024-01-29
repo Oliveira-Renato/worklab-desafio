@@ -84,7 +84,7 @@ const FormularioPaciente = () => {
 
             {/* Corpo do formulário */}
             <div className={`${styles.padding} w-full`}>
-              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="m-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 {/* Renderização  dinamica de inputs */}
                 {['nome_completo', 'email', 'celular'].map((campo) => (
                   <Input
@@ -105,7 +105,7 @@ const FormularioPaciente = () => {
                       id="sexo"
                       name="sexo"
                       autoComplete="sexo-name"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6 p-2"
+                      className="rounded-md ring-1 border-gray-300 p-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 sm:text-sm sm:leading-5 outline-none transition-all duration-300 ease-in-out"
                       value={paciente.sexo}
                       onChange={ (e) => handleInputChange('sexo', e.target.value )}
                     >
