@@ -1,6 +1,6 @@
 # Desafio Fullstack Worklab
 
-## Descrição
+## :mag: Descrição
 
 Bem-vindo à minha versão do sistema Worklab! Neste projeto, busco criar uma versão simplificada do sistema Worklab. Ao completar esse desafio, tornei possível a simulação de um fluxo básico com as seguintes funcionalidades:
 
@@ -17,8 +17,32 @@ Bem-vindo à minha versão do sistema Worklab! Neste projeto, busco criar uma ve
 
 * Facilita a geração de relatórios simples, fornecendo informações relevantes sobre os pacientes e os exames vinculados.
 
+## :test_tube: Tecnologias Utilizadas:
 
-## Pré-requisitos
+### Backend:
+- **PHP:** Linguagem de programação principal para o desenvolvimento do backend.
+- **Laravel:** Framework PHP utilizado para construir a estrutura da aplicação.
+- **Composer:** Gerenciador de dependências para PHP, utilizado para instalar e gerenciar bibliotecas.
+- **MySQL:** Sistema de gerenciamento de banco de dados relacional, usado para armazenar dados da aplicação.
+
+### Frontend:
+- **JavaScript (ES6+):** Linguagem de programação utilizada para desenvolver a lógica do frontend.
+- **React:** Biblioteca JavaScript para construção da interface do usuário.
+- **Vite:** Build tool e bundler rápida para projetos frontend.
+- **Axios:** Biblioteca para realizar requisições HTTP.
+- **Tailwind CSS:** Framework CSS utilizado para estilizar a aplicação.
+
+### Ambiente de Desenvolvimento:
+- **Node.js:** Ambiente de execução para JavaScript fora do navegador.
+- **npm / Yarn:** Gerenciadores de pacotes para instalar, compartilhar e controlar versões de dependências.
+- **XAMPP:** Conjunto de softwares que facilita a criação de um servidor web local, incluindo Apache, MySQL, PHP, entre outros.
+
+### Ferramentas Adicionais:
+- **Git:** Sistema de controle de versão utilizado para gerenciar o código-fonte do projeto.
+- **GitHub:** Plataforma de hospedagem de código-fonte e colaboração.
+- **phpMyAdmin:** Interface web para gerenciamento de bancos de dados MySQL.
+
+## :computer: Pré-requisitos
 
 ### PHP
 
@@ -39,7 +63,7 @@ Bem-vindo à minha versão do sistema Worklab! Neste projeto, busco criar uma ve
 - [Baixe e instale o XAMPP](https://www.apachefriends.org/index.html).
 - Inicie os servidores Apache e MySQL no XAMPP.
 
-## Configuração do Projeto
+## :gear: Configuração do Projeto
 
 1. **Clonar o Repositório:**
    - Clone o repositório do seu projeto para o seu ambiente local.
@@ -54,7 +78,7 @@ Bem-vindo à minha versão do sistema Worklab! Neste projeto, busco criar uma ve
    - Execute `cd worklab-frontend` para entrar no diretório onde se encontra o frontend da apliação.
    - Execute `npm install` ou `yarn install` no diretório do projeto para instalar as dependências do Node.js.
    - Crie um arquivo *.env* na raiz do projeto frontend e preencha com a seguinte informação:
-     * VITE_API_BASE_URL=http://localhost:8000 //ou porta que sua API estejá rodando.
+     * VITE_API_BASE_URL=http://localhost:8000 ou porta que sua API estejá rodando.
 
 4. **Configurar o Banco de Dados:**
    - Certifique-se de que o servidor MySQL no XAMPP esteja em execução.
