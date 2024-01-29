@@ -57,7 +57,7 @@ const Relatorio = () => {
           <div className="mt-4 bg-white p-6 rounded-md shadow-md">
             {/* Exiba as informações do relatório conforme necessário */}
             <h3 className="text-xl font-bold mb-2">Relatório do Paciente {numeroAtendimento}</h3>
-            
+            <hr />
             <div className="mb-2">
               <span className="font-bold">Nome Completo:</span> {relatorio.nome_completo}
             </div>
@@ -73,6 +73,30 @@ const Relatorio = () => {
             <div className="mb-2">
               <span className="font-bold">Celular:</span> {relatorio.celular}
             </div>
+            <hr />
+            <h4 className="text-xl font-bold mb-2">Exames</h4>
+            { relatorio.exames.length > 0 ? (
+              <table>
+              <thead>
+                <tr>
+                  <th className='text-left'>Descrição</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                {relatorio.exames.map((exame)=> (
+                  <tr key={exame.codigo}>
+                    <td>{exame.codigo} / {exame.descricao}</td>
+                    <td>{exame.valor}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            ):(
+              <div className="mb-2">
+               Nenhum exame vinculado a esse paciente.
+              </div>
+            )}
           </div>
         )}
       </div>
