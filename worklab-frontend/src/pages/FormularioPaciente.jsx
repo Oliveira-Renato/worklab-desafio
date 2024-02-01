@@ -17,9 +17,9 @@ const FormularioPaciente =  () => {
 
   // Função para lidar com o envio do formulário
   const handleSalvar = async  (data) => {
-    try {
-      setLoading(true)
+    setLoading(true)
 
+    try {
       // Faz requisição para pegar o último número de atendimento
       const response = await axiosClient.get('/paciente/ultimo-numero-atendimento')
       const ultimoNumeroAtendimento = response.data

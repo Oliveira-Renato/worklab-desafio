@@ -8,44 +8,29 @@ import axiosClient from "../axios";
 import NavBar from "../components/NavBar";
 import Input from "../components/Input";
 import ButtonsDefault from "../components/ButtonsDefault";
+import { useForm } from "react-hook-form";
 
 // Componente principal FormularioExame
 const FormularioExame = () => {
   // Estados para controlar o formulário e a carga
+  const { register, handleSubmit, reset } = useForm()
   const [ loading, setLoading ] = useState(false)
-  const [exame, setExame] = useState({
-    codigo: "",
-    descricao: "",
-    valor: "",
-  })
-
-  // Função para manipular mudanças nos inputs do formulário
-  const handleInputChange = (campo, valor) => {
-    setExame((prevExame) => ({...prevExame, [campo]: valor}))
-  }
 
   // Função para lidar com o envio do formulário
-  const handleSalvar = (e) => {
-    e.preventDefault()
+  const handleSalvar = async (data) => {
     setLoading(true)
-
-    // Envia dados para o backend
-    axiosClient.post('/exames', exame)
-    .then(response => {
-      console.log('Exame cadastrado com sucesso', response.data)
-      // Limpa os campos do formulário após o cadastro
-      setExame({
-        codigo: "",
-        descricao: "",
-        valor: "",
-      })
-
+    
+    try {
+      const postResponse = await axiosClient.post('/exames', data)
+      alert('Exame cadastrado com sucesso', postResponse.data)
+      // Resetar o formulário após o sucesso
+      reset()
       setLoading(false)
-    })
-    .catch( error => {
+    } catch (error) {
       console.error('Erro ao cadastrar exame:', error)
+      reset()
       setLoading(false)
-    })
+    }
   }
   
   // Renderiza a estrutura do componente
@@ -55,7 +40,7 @@ const FormularioExame = () => {
       <NavBar />
 
       {/* Formulário */}
-      <form onSubmit={handleSalvar}>
+      <form onSubmit={handleSubmit(handleSalvar)}>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             {/* Cabeçalho do formulário */}
@@ -69,12 +54,22 @@ const FormularioExame = () => {
               {/* Renderização dinâmica de inputs */}
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   {['codigo','descricao', 'valor'].map((campo) => (
-                    <Input
-                      key={campo}
-                      label={campo}
-                      value={exame[campo]}
-                      onChange={handleInputChange}
-                    />
+                     <div className="sm:col-span-3" key={campo}>
+                      {/* Rótulo do input */}
+                      <label htmlFor={campo} className="block text-sm font-medium leading-6 text-gray-900">
+                        {campo}
+                      </label>
+                      <div className="mt-2">
+                        {/* Input controlado com propriedades value e onChange */}
+                        <input
+                          id={campo}
+                          name={campo}
+                          type="text"
+                          {...register(campo)}
+                          className="block w-full rounded-md ring-1 border-gray-300 p-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 sm:text-sm sm:leading-5 outline-none transition-all duration-300 ease-in-out"
+                          />
+                        </div>
+                    </div>
                   ))}
               </div>
 
