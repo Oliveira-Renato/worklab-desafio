@@ -6,7 +6,6 @@ import axiosClient from "../axios";
 
 // Importa componentes
 import NavBar from "../components/NavBar";
-import Input from "../components/Input";
 import ButtonsDefault from "../components/ButtonsDefault";
 import { useForm } from "react-hook-form";
 

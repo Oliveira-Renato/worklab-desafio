@@ -3,7 +3,7 @@ import ButtonBackMenu from "./ButtonBackMenu";
 // Componente funcional ButtonsDefault
 const ButtonsDefault = ({loading}) => {
   return (
-    <div className="mt-6 flex items-center justify-between flex-wrap">
+    <div className="mt-6 flex items-center justify-between flex-wrap gap-2">
       {/* Botão para cancelar a operação */}
       <ButtonBackMenu />
 

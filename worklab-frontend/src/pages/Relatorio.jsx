@@ -5,36 +5,30 @@ import axiosClient from "../axios";
 
 // Importa componentes necessários
 import NavBar from "../components/NavBar";
-import ButtonBackMenu from '../components/ButtonBackMenu';
+import ButtonsDefault from "../components/ButtonsDefault";
+import { useForm } from "react-hook-form"
+import { isEmpty } from 'lodash';
 
 // Componente principal Relatorio
 const Relatorio = () => {
-   // Estados para controlar dados do formulário e resultados do relatório
-  const [numeroAtendimento, setNumeroAtendimento] = useState('');
-  const [relatorio, setRelatorio] = useState({});
-
-  // Manipula a mudança no número de atendimento
-  const handleNumeroAtendimentoChange = (e) => {
-    let numeroAtendimento = Number(e.target.value);
-    numeroAtendimento ? setNumeroAtendimento(numeroAtendimento) : setNumeroAtendimento('')
-  };
+  // Estados para controlar dados do formulário e resultados do relatório
+  const { register, handleSubmit, reset } = useForm()
+  const [relatorio, setRelatorio] = useState({})
 
   // Realiza uma requisição para obter o relatório com base no número de atendimento
-  const handleBuscarRelatorio = () => {
-    if(numeroAtendimento) {
-      axiosClient.get(`/pacientes/${numeroAtendimento}`)
-      .then(response => {
-        setRelatorio(response.data);
-        setNumeroAtendimento('')
-      })
-      .catch(error => {
-        console.error('Erro ao buscar relatório:', error);
-        // setRelatorio({});
-      });
-    } else {
-      console.log('Número de atendimento do paciente não informado')
+  const handleBuscarRelatorio = async (data) => {
+    try {
+      const { numeroAtendimento } = data
+
+      if(!isEmpty(data.numeroAtendimento)) {
+        const response = await axiosClient.get(`/pacientes/${numeroAtendimento}`)
+        setRelatorio(response.data)
+        reset()
+      }
+    } catch (error) {
+      console.error('Erro ao buscar relatório:', error);
+      reset()
     }
-    
   };
 
   // Renderiza a estrutura do componente
@@ -46,88 +40,79 @@ const Relatorio = () => {
        {/* Renderiza a seção de cabeçalho */}
       <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
         <h2 className="text-3xl font-bold mb-2">Gerar Relatorio</h2>
-        <p className="sm:text-sm md:text-lg  "> obtenha informações detalhadas sobre pacientes e exames para uma análise abrangente.</p>
+        <p className="sm:text-sm md:text-lg  ">Obtenha informações detalhadas sobre pacientes e exames para uma análise abrangente.</p>
       </div>
 
       {/* Renderiza o formulário de busca de relatório */}
-      <div className="flex flex-col items-center">
-        {/* Input para número de atendimento */}
-        <label htmlFor="numeroAtendimento" className="mb-2">
-          Número de Atendimento:
-        </label>
-        <input
-          type="text"
-          id="numeroAtendimento"
-          name="numeroAtendimento"
-          value={numeroAtendimento}
-          onChange={handleNumeroAtendimentoChange}
-          className="p-2 mb-4 rounded-md ring-1 border-gray-300  text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 sm:text-sm sm:leading-5 outline-none transition-all duration-300 ease-in-out"
-        />
+      <form onSubmit={handleSubmit(handleBuscarRelatorio)}>
+        <div className="flex flex-col items-center">
+          {/* Input para número de atendimento */}
+          <label htmlFor="numeroAtendimento" className="mb-2">
+            Número de Atendimento:
+          </label>
+          <input
+            type="text"
+            id="numeroAtendimento"
+            {...register('numeroAtendimento')}
+            className="p-2 mb-4 rounded-md ring-1 border-gray-300  text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 sm:text-sm sm:leading-5 outline-none transition-all duration-300 ease-in-out"
+          />
 
-        {/* Botões para navegação e busca de relatório */}
-       <div className='flex flex-wrap items-center gap-4 m-auto justify-center'>
-        {/* Botão para voltar ao menu */}
-        <ButtonBackMenu />
-
-        {/* Botão para buscar relatório */}
-        <button
-          onClick={handleBuscarRelatorio}
-          className="rounded-md bg-indigo-500 text-[16px] font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-2 px-14"
-        >
-          Buscar Relatório
-        </button>
-       </div>
-
-        {/* Condição para exibir o relatório se existir */}
-        { Object.keys(relatorio).length  ? (
-          <div className="mt-4 bg-white p-6 rounded-md shadow-md w-fit">
-            {/* Exiba as informações do relatório conforme necessário */}
-            <h3 className="text-xl font-bold mb-2">Relatório do Paciente {relatorio.numero_atendimento}</h3>
-            <hr />
-            <div className="mb-2">
-              <span className="font-bold">Nome Completo:</span> {relatorio.nome_completo}
-            </div>
-            
-            <div className="mb-2">
-              <span className="font-bold">Email:</span> {relatorio.email}
-            </div>
-            
-            <div className="mb-2">
-              <span className="font-bold">Sexo:</span> {relatorio.sexo === 'M' ? 'Masculino' : 'Feminino'}
-            </div>
-            
-            <div className="mb-2">
-              <span className="font-bold">Celular:</span> {relatorio.celular}
-            </div>
-            <hr />
-            <h4 className="text-xl font-bold mb-2">Exames</h4>
-
-            {/* Condição para exibir os exames ou uma mensagem se não houver exames vinculados */}
-            { Object.keys(relatorio).length ? (
-              <table>
-                <thead>
-                  <tr>
-                    <th className='text-left'>Descrição</th>
-                    <th>Valor</th>
-                  </tr>
-                </thead>
-              <tbody>
-                {relatorio.exames.map((exame)=> (
-                  <tr key={exame.codigo}>
-                    <td>{exame.codigo} / {exame.descricao}</td>
-                    <td>{exame.valor}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            ):(
-              <div className="mb-2">
-               Nenhum exame vinculado a esse paciente.
-              </div>
-            )}
+          {/* Botões para navegação e busca de relatório */}
+          <div>
+            <ButtonsDefault />
           </div>
-        ): (<></>)}
-      </div>
+        </div>
+      </form>
+
+      {/* Condição para exibir o relatório se existir */}
+      { Object.keys(relatorio).length  ? (
+        <div className="mt-4 bg-white p-6 rounded-md shadow-md w-fit">
+          {/* Exiba as informações do relatório conforme necessário */}
+          <h3 className="text-xl font-bold mb-2">Relatório do Paciente {relatorio.numero_atendimento}</h3>
+          <hr />
+          <div className="mb-2">
+            <span className="font-bold">Nome Completo:</span> {relatorio.nome_completo}
+          </div>
+          
+          <div className="mb-2">
+            <span className="font-bold">Email:</span> {relatorio.email}
+          </div>
+          
+          <div className="mb-2">
+            <span className="font-bold">Sexo:</span> {relatorio.sexo === 'M' ? 'Masculino' : 'Feminino'}
+          </div>
+          
+          <div className="mb-2">
+            <span className="font-bold">Celular:</span> {relatorio.celular}
+          </div>
+          <hr />
+          <h4 className="text-xl font-bold mb-2">Exames</h4>
+
+          {/* Condição para exibir os exames ou uma mensagem se não houver exames vinculados */}
+          { Object.keys(relatorio).length ? (
+            <table>
+              <thead>
+                <tr>
+                  <th className='text-left'>Descrição</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+            <tbody>
+              {relatorio.exames.map((exame)=> (
+                <tr key={exame.codigo}>
+                  <td>{exame.codigo} / {exame.descricao}</td>
+                  <td>{exame.valor}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          ):(
+            <div className="mb-2">
+            Nenhum exame vinculado a esse paciente.
+            </div>
+          )}
+        </div>
+      ): (<></>)}
     </>
   );
 }
