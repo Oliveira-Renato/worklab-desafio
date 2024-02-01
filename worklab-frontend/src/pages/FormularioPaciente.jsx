@@ -1,69 +1,47 @@
 // Importa hooks necessários e estilos
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { styles } from '../utils/styles'
+import { useForm } from "react-hook-form"
 
 // Importa instância do cliente Axios personalizada
 import axiosClient from "../axios";
 
 // Importa componentes
-import Input from "../components/Input";
 import NavBar from "../components/NavBar";
 import ButtonsDefault from "../components/ButtonsDefault";
 
 // Componente principal FormularioPaciente
-const FormularioPaciente = () => {
-  // Estados para controlar o formulário e a carga
+const FormularioPaciente =  () => {
+  const { register, handleSubmit, reset } = useForm()
   const [ loading, setLoading ] = useState(false)
-  const [paciente, setPaciente] = useState({
-    nome_completo: "",
-    email: "",
-    celular: "",
-    sexo: "M",
-    numero_atendimento: null,
-  })
-
-  // Realiza uma requisição para obter o último valor da coluna numero_atendimento
-  useEffect(() => {
-    axiosClient.get('/paciente/ultimo-numero-atendimento')
-      .then(response => {
-        const ultimoNumeroAtendimento = response.data;
-        const numeroAtendimento = isNaN(ultimoNumeroAtendimento)  ? 1 : ultimoNumeroAtendimento + 1;
-        setPaciente(prevPaciente => ({ ...prevPaciente, numero_atendimento: numeroAtendimento }))
-      })
-      .catch(error => {
-        console.error('Erro ao obter o último número de atendimento:', error);
-      });
-  }, [loading]);
-
-  // Função para manipular mudanças nos inputs do formulário
-  const handleInputChange = (campo, valor) => {
-    setPaciente((prevPaciente) => ({...prevPaciente, [campo]: valor}))
-  }
 
   // Função para lidar com o envio do formulário
-  const handleSalvar = (e) => {
-    e.preventDefault()
-    setLoading(true)
+  const handleSalvar = async  (data) => {
+    try {
+      setLoading(true)
 
-    // Envia dados para o backend
-    axiosClient.post('/pacientes', paciente)
-    .then(response => {
-      console.log('Paciente cadastrado com sucesso', paciente.data)
-      setPaciente({
-        nome_completo: "",
-        email: "",
-        celular: "",
-        sexo: ""
-      })
+      // Faz requisição para pegar o último número de atendimento
+      const response = await axiosClient.get('/paciente/ultimo-numero-atendimento')
+      const ultimoNumeroAtendimento = response.data
+      const numeroAtendimento = isNaN(ultimoNumeroAtendimento) ? 1 : ultimoNumeroAtendimento + 1
+      
+      data.numero_atendimento = numeroAtendimento
 
+      // Envia dados para o backend
+      const postResponse = await axiosClient.post('/pacientes', data)
+      alert('Paciente cadastrado com sucesso', postResponse.data)
+
+      // Resetar o formulário após o sucesso
+      reset()
+      //Para o loading
       setLoading(false)
-    })
-    .catch( error => {
+    } catch (error) {
       console.error('Erro ao cadastrar paciente:', error)
+      reset()
       setLoading(false)
-    })
+    }
   }
-  console.log('RENDER PACIENTES FORM')
+
   // Renderiza a estrutura do componente
   return (
     <>
@@ -71,7 +49,7 @@ const FormularioPaciente = () => {
       <NavBar />
 
       {/* Formulário */}
-      <form onSubmit={handleSalvar}>
+      <form onSubmit={handleSubmit(handleSalvar)}>
         <div className="space-y-12 m-auto">
           <div className="border-b border-gray-900/10 pb-12">
             
@@ -86,12 +64,25 @@ const FormularioPaciente = () => {
               <div className="m-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 {/* Renderização  dinamica de inputs */}
                 {['nome_completo', 'email', 'celular'].map((campo) => (
-                  <Input
-                    key={campo}
-                    label={campo}
-                    value={paciente[campo]}
-                    onChange={handleInputChange}
-                  />
+
+                  <div className="sm:col-span-3" key={campo}>
+                    {/* Rótulo do input */}
+                    <label htmlFor={campo} className="block text-sm font-medium leading-6 text-gray-900">
+                      {campo}
+                    </label>
+                    <div className="mt-2">
+                      {/* Input controlado com propriedades value e onChange */}
+                      <input
+
+                        id={campo}
+                        name={campo}
+                        // value={value}
+                        type="text"
+                        {...register(campo)}
+                        className="block w-full rounded-md ring-1 border-gray-300 p-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 sm:text-sm sm:leading-5 outline-none transition-all duration-300 ease-in-out"
+                        />
+                      </div>
+                  </div>
                 ))}
 
                 {/* Input select para o campo 'sexo' */}
@@ -105,9 +96,9 @@ const FormularioPaciente = () => {
                       name="sexo"
                       autoComplete="sexo-name"
                       className="rounded-md ring-1 border-gray-300 p-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 sm:text-sm sm:leading-5 outline-none transition-all duration-300 ease-in-out"
-                      value={paciente.sexo}
-                      onChange={ (e) => handleInputChange('sexo', e.target.value )}
+                      {...register("sexo")}
                     >
+                       <option value={''}>...</option>
                       <option value={'M'}>Masculino</option>
                       <option value={'F'}>Feminino</option>
                     </select>
