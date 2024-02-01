@@ -28,7 +28,6 @@ const FormularioPaciente = () => {
       .then(response => {
         const ultimoNumeroAtendimento = response.data;
         const numeroAtendimento = isNaN(ultimoNumeroAtendimento)  ? 1 : ultimoNumeroAtendimento + 1;
-        console.log( numeroAtendimento)
         setPaciente(prevPaciente => ({ ...prevPaciente, numero_atendimento: numeroAtendimento }))
       })
       .catch(error => {
@@ -64,7 +63,7 @@ const FormularioPaciente = () => {
       setLoading(false)
     })
   }
-  
+  console.log('RENDER PACIENTES FORM')
   // Renderiza a estrutura do componente
   return (
     <>

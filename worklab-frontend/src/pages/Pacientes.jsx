@@ -28,6 +28,7 @@ const Pacientes = () => {
       })
   }, [])
 
+  console.log('RENDER PACIENTES')
   // Renderiza a estrutura do componente
   return (
     <div>
