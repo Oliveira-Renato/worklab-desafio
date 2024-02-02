@@ -14,9 +14,12 @@ const Relatorio = () => {
   // Estados para controlar dados do formulário e resultados do relatório
   const { register, handleSubmit, reset } = useForm()
   const [relatorio, setRelatorio] = useState({})
+  const [ loading, setLoading ] = useState(false)
 
   // Realiza uma requisição para obter o relatório com base no número de atendimento
   const handleBuscarRelatorio = async (data) => {
+    setLoading(true)
+    
     try {
       const { numeroAtendimento } = data
 
@@ -29,6 +32,8 @@ const Relatorio = () => {
       console.error('Erro ao buscar relatório:', error);
       reset()
     }
+    
+    setLoading(false)
   };
 
   // Renderiza a estrutura do componente
@@ -59,7 +64,11 @@ const Relatorio = () => {
 
           {/* Botões para navegação e busca de relatório */}
           <div>
-            <ButtonsDefault />
+            <ButtonsDefault loading={loading} config={{
+              'pTitle': 'Buscar',
+              'pLoading': 'Buscando...'
+            }} 
+            />
           </div>
         </div>
       </form>
