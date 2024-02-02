@@ -9,6 +9,8 @@ import ButtonsDefault from "../components/ButtonsDefault";
 import { useForm } from "react-hook-form"
 import { isEmpty } from 'lodash';
 
+import downloadIcon from '../assets/download.svg'
+
 // Componente principal Relatorio
 const Relatorio = () => {
   // Estados para controlar dados do formulário e resultados do relatório
@@ -75,51 +77,58 @@ const Relatorio = () => {
 
       {/* Condição para exibir o relatório se existir */}
       { Object.keys(relatorio).length  ? (
-        <div className="mt-4 bg-white p-6 rounded-md shadow-md w-fit">
-          {/* Exiba as informações do relatório conforme necessário */}
-          <h3 className="text-xl font-bold mb-2">Relatório do Paciente {relatorio.numero_atendimento}</h3>
-          <hr />
-          <div className="mb-2">
-            <span className="font-bold">Nome Completo:</span> {relatorio.nome_completo}
-          </div>
-          
-          <div className="mb-2">
-            <span className="font-bold">Email:</span> {relatorio.email}
-          </div>
-          
-          <div className="mb-2">
-            <span className="font-bold">Sexo:</span> {relatorio.sexo === 'M' ? 'Masculino' : 'Feminino'}
-          </div>
-          
-          <div className="mb-2">
-            <span className="font-bold">Celular:</span> {relatorio.celular}
-          </div>
-          <hr />
-          <h4 className="text-xl font-bold mb-2">Exames</h4>
-
-          {/* Condição para exibir os exames ou uma mensagem se não houver exames vinculados */}
-          { Object.keys(relatorio).length ? (
-            <table>
-              <thead>
-                <tr>
-                  <th className='text-left'>Descrição</th>
-                  <th>Valor</th>
-                </tr>
-              </thead>
-            <tbody>
-              {relatorio.exames.map((exame)=> (
-                <tr key={exame.codigo}>
-                  <td>{exame.codigo} / {exame.descricao}</td>
-                  <td>{exame.valor}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          ):(
-            <div className="mb-2">
-            Nenhum exame vinculado a esse paciente.
+        <div className='flex justify-center '>
+          <div className="mt-4 bg-white p-6 rounded-md shadow-md w-fit relative">
+            <div className='w-full bg-stone-900 absolute top-0 right-0'>
+              <div className='w-full black-gradient rounded-full flex justify-end items-center text-white'>
+                <img src={downloadIcon} alt="download icon" className='w-8 h-8 object-contain cursor-pointer m-1' />
+              </div>
             </div>
-          )}
+            {/* Exiba as informações do relatório conforme necessário */}
+            <h3 className="text-xl font-bold mb-2 mt-10">Relatório do Paciente {relatorio.numero_atendimento}</h3>
+            <hr />
+            <div className="mb-2">
+              <span className="font-bold">Nome Completo:</span> {relatorio.nome_completo}
+            </div>
+            
+            <div className="mb-2">
+              <span className="font-bold">Email:</span> {relatorio.email}
+            </div>
+            
+            <div className="mb-2">
+              <span className="font-bold">Sexo:</span> {relatorio.sexo === 'M' ? 'Masculino' : 'Feminino'}
+            </div>
+            
+            <div className="mb-2">
+              <span className="font-bold">Celular:</span> {relatorio.celular}
+            </div>
+            <hr />
+            <h4 className="text-xl font-bold mb-2">Exames</h4>
+
+            {/* Condição para exibir os exames ou uma mensagem se não houver exames vinculados */}
+            { Object.keys(relatorio).length ? (
+              <table>
+                <thead>
+                  <tr>
+                    <th className='text-left'>Descrição</th>
+                    <th>Valor</th>
+                  </tr>
+                </thead>
+              <tbody>
+                {relatorio.exames.map((exame)=> (
+                  <tr key={exame.codigo}>
+                    <td>{exame.codigo} / {exame.descricao}</td>
+                    <td>{exame.valor}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            ):(
+              <div className="mb-2">
+              Nenhum exame vinculado a esse paciente.
+              </div>
+            )}
+          </div>
         </div>
       ): (<></>)}
     </>
