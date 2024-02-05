@@ -7,8 +7,8 @@ import axiosClient from "../axios";
 
 // Importa componentes necessários
 import NavBar from "../components/NavBar";
-import ButtonBackMenu from '../components/ButtonBackMenu';
 import ButtonsDefault from '../components/ButtonsDefault';
+import { styles } from '../utils/styles'
 
 // Componente principal VincularExame
 const VincularExame = () => {
@@ -60,13 +60,15 @@ const VincularExame = () => {
     <>
       {/* Renderiza a barra de navegação */}
       <NavBar />
-      <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
-        <h2 className="text-3xl font-bold mb-2">Vincular Exame</h2>
-        <p className="md:text-lg sm:text-sm">Registre a associação de exames aos pacientes para manter um histórico preciso.</p>
-      </div>
+      <header>
+        <div className="w-full flex flex-col items-center bg-gray-200 p-4 text-gray-800 mb-20">
+          <h2 className="text-3xl font-bold mb-2">Vincular Exame</h2>
+          <p className="md:text-lg sm:text-sm">Registre a associação de exames aos pacientes para manter um histórico preciso.</p>
+        </div>
+      </header>
 
       {/* Renderiza a seção de cabeçalho */}
-      <div className="flex flex-col items-center justify-center">
+      <div className={`${styles.padding} w-full flex flex-col items-center justify-center`}>
         {/* Renderiza o formulário de vinculação de exame */}
         <form onSubmit={handleSubmit(handleVincularExame)}>
           <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-6 align-middle'>

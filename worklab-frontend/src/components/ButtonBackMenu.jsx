@@ -8,7 +8,7 @@ const ButtonBackMenu = () => {
 
   return (
     <button
-      className="rounded-md bg-red-500 text-[16px] font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-2 px-14"
+      className="rounded-md bg-red-500 text-[16px] font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 py-2  md:px-10 px-10"
       onClick={handleVoltarParaMenu}
     >
       Voltar
