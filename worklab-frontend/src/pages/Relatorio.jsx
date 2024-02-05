@@ -1,5 +1,6 @@
 // Importa o hook useState do React
 import { useState } from 'react';
+import toast from "react-hot-toast";
 // Importa a instância do cliente Axios personalizada
 import axiosClient from "../axios";
 
@@ -25,16 +26,16 @@ const Relatorio = () => {
     try {
       const { numeroAtendimento } = data
 
-      if(!isEmpty(data.numeroAtendimento)) {
+      if(!isEmpty(numeroAtendimento)) {
         const response = await axiosClient.get(`/pacientes/${numeroAtendimento}`)
         setRelatorio(response.data)
-        reset()
       }
     } catch (error) {
+      toast.error('Erro ao buscar relatório.')
       console.error('Erro ao buscar relatório:', error);
-      reset()
     }
-    
+
+    reset()
     setLoading(false)
   };
 

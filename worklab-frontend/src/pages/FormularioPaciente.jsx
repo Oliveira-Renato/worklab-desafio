@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { styles } from '../utils/styles'
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 
 // Importa instância do cliente Axios personalizada
 import axiosClient from "../axios";
@@ -29,17 +30,15 @@ const FormularioPaciente =  () => {
 
       // Envia dados para o backend
       const postResponse = await axiosClient.post('/pacientes', data)
-      alert('Paciente cadastrado com sucesso', postResponse.data)
-
-      // Resetar o formulário após o sucesso
-      reset()
-      //Para o loading
-      setLoading(false)
+      toast.success('Paciente cadastrado com sucesso.')
+      
     } catch (error) {
+      toast.error('Erro ao cadastrar paciente.')
       console.error('Erro ao cadastrar paciente:', error)
-      reset()
-      setLoading(false)
     }
+   
+    reset() // Resetar o formulário após o sucesso
+    setLoading(false)//Para o loading
   }
 
   // Renderiza a estrutura do componente

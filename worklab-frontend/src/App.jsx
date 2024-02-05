@@ -9,7 +9,6 @@ function App() {
     <div className="w-full h-screen">
       <NavBar />
       <Menu />
-
       {/* Renderiza o ponto de saída (Outlet) para rotas aninhadas */}
       <Outlet />
     </div>

@@ -1,6 +1,7 @@
 // Importa hooks do React
 import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast";
 // Importa instância do cliente Axios personalizada
 import axiosClient from "../axios";
 
@@ -32,10 +33,10 @@ const VincularExame = () => {
       }
 
       const response = await axiosClient.post(`/paciente/${numeroAtendimento}/exame/${exame}`)
-      alert('Exame vinculado com sucesso', response.data)
+      toast.success('Exame vinculado com sucesso')
 
     } catch (error) {
-      alert(error.message)
+      toast.error(error.message)
       console.log('Erro ao vincular exame:', error)
     }
 

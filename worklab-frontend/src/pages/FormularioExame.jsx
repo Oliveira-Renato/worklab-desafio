@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { styles } from '../utils/styles'
+import toast from "react-hot-toast";
 
 // Importa instância do cliente Axios personalizada
 import axiosClient from "../axios";
@@ -18,18 +19,17 @@ const FormularioExame = () => {
   // Função para lidar com o envio do formulário
   const handleSalvar = async (data) => {
     setLoading(true)
-    
+
     try {
-      const postResponse = await axiosClient.post('/exames', data)
-      alert('Exame cadastrado com sucesso', postResponse.data)
-      // Resetar o formulário após o sucesso
-      reset()
-      setLoading(false)
+      await axiosClient.post('/exames', data)
+      toast.success('Exame cadastrado com sucesso.')
+      
     } catch (error) {
+      toast.error('Erro ao cadastrar exame.')
       console.error('Erro ao cadastrar exame:', error)
-      reset()
-      setLoading(false)
     }
+    reset() // Resetar o formulário 
+    setLoading(false)//Para o loading
   }
   
   // Renderiza a estrutura do componente
