@@ -7,6 +7,7 @@ import { styles } from '../utils/styles'
 import axiosClient from "../axios";
 // Importa componente ButtonBackMenu
 import ButtonBackMenu from "../components/ButtonBackMenu";
+import DefaultSpinner from "../components/DefaultSpinner";
 
 // Componente principal Pacientes
 const Pacientes = () => {
@@ -28,7 +29,7 @@ const Pacientes = () => {
       })
   }, [])
 
-  console.log('RENDER PACIENTES')
+  
   // Renderiza a estrutura do componente
   return (
     <div>
@@ -55,11 +56,14 @@ const Pacientes = () => {
 
          {/* Tabela de pacientes */}
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-50 bg-slate-600">
+          {!pacientes.length  ? (
+            <DefaultSpinner />
+          ) : (
+            <table className="w-full text-sm text-left rtl:text-right text-gray-50 bg-slate-600">
               <thead>
                 <tr>
                   <th scope="col" className="px-6 py-3">
-                     Numero Atendimento
+                      Numero Atendimento
                   </th>
                   <th scope="col" className="px-6 py-3">
                       Paciente
@@ -69,26 +73,28 @@ const Pacientes = () => {
                   </th>
                 </tr>
               </thead>
-            <tbody>
-              {/* Mapeia os pacientes e cria linhas na tabela para cada um */}
-              {pacientes.map((paciente) => (
-                <tr key={paciente.numero_atendimento} className="bg-white hover:bg-gray-50">
-                  <td scope="row" className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
-                    {paciente.numero_atendimento}
-                  </td>
-                  <td className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
-                    {paciente.nome_completo}
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <a href="#" className="font-medium text-blue-600 hover:underline">
-                      Visualizar
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+              <tbody>
+                {/* Mapeia os pacientes e cria linhas na tabela para cada um */}
+                {pacientes.map((paciente) => (
+                  <tr key={paciente.numero_atendimento} className="bg-white hover:bg-gray-50">
+                    <td scope="row" className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
+                      {paciente.numero_atendimento}
+                    </td>
+                    <td className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
+                      {paciente.nome_completo}
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <a href="#" className="font-medium text-blue-600 hover:underline">
+                        Visualizar
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
+    
       </div>
     </div>
   );

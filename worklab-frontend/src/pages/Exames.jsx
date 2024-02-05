@@ -5,8 +5,9 @@ import { styles } from '../utils/styles'
 
 // Importa instância do cliente Axios personalizada
 import axiosClient from "../axios";
-// Importa componente ButtonBackMenu
+// Importa componentes
 import ButtonBackMenu from "../components/ButtonBackMenu";
+import DefaultSpinner from "../components/DefaultSpinner";
 
 // Componente funcional Exames
 export default function Exames() {
@@ -54,40 +55,45 @@ export default function Exames() {
 
         {/* Tabela de exames */}
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-50 bg-slate-500">
-            <thead>
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                    Descrição
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    Valor
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    <span className="sr-only">Editar</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-               {/* Mapeia os exames e cria linhas na tabela para cada um */}
-              {exames.map((exame) => (
-                <tr key={exame.codigo} className="bg-white hover:bg-gray-50">
-                  <td scope="row" className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
-                    {exame.codigo}
-                  </td>
-                  <td className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
-                    {exame.descricao}
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <a href="#" className="font-medium text-blue-600 hover:underline">
-                      Editar
-                    </a>
-                  </td>
+          {!exames.length ? (
+            <DefaultSpinner />
+          ) : (
+            <table className="w-full text-sm text-left rtl:text-right text-gray-50 bg-slate-500">
+              <thead>
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                      Descrição
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                      Valor
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                      <span className="sr-only">Editar</span>
+                  </th>
                 </tr>
-              ))}
-              
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {/* Mapeia os exames e cria linhas na tabela para cada um */}
+                {exames.map((exame) => (
+                  <tr key={exame.codigo} className="bg-white hover:bg-gray-50">
+                    <td scope="row" className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
+                      {exame.codigo}
+                    </td>
+                    <td className="px-6 py-4 font-medium text-tertiary whitespace-nowrap">
+                      {exame.descricao}
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <a href="#" className="font-medium text-blue-600 hover:underline">
+                        Editar
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+                
+              </tbody>
+            </table>
+          )}
+          
         </div>
       </div>
     </div>
