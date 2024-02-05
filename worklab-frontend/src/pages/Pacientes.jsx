@@ -20,16 +20,30 @@ const Pacientes = () => {
 
   // Efeito para buscar dados de pacientes ao montar o componente
   useEffect(() => {
-    axiosClient.get('/pacientes')
-      .then(response => {
-        setPacientes(response.data)
-      })
-      .catch(error => {
+    const buscaPacientes = async () => {
+      try {
+        const response = await axiosClient.get('/pacientes')
+        if(response.data.length > 0) {
+          setPacientes(response.data)
+        } else {
+          setTimeout(()=> {
+            setPacientes([{
+              numero_atendimento: '',
+              nome_completo: 'Nenhum paciente cadastrado'
+            }])
+          }, 2000)
+        }
+      } catch (error) {
         console.error('Erro ao obter lista de pacientes:', error)
-      })
+      }
+    }
+
+    buscaPacientes()
   }, [])
 
+
   
+  console.log('render',pacientes  )
   // Renderiza a estrutura do componente
   return (
     <div>

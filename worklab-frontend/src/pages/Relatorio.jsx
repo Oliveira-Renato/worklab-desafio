@@ -92,7 +92,7 @@ const Relatorio = () => {
               </div>
             </div>
             {/* Exiba as informações do relatório conforme necessário */}
-            <div ref={targetRef} className="max-w-[794px] h-auto bg-white p-6 border border-gray-300 rounded-md shadow-md">
+            <div ref={targetRef} className="max-w-[794px] md:w-[794px] h-auto bg-white p-6 border border-gray-300 rounded-md shadow-md">
               <div>
                 {/* CABEÇALHO RELATÓRIO */}
                 <header className="mb-6 border-t border-b border-t-0 border-gray-300 flex justify-between">

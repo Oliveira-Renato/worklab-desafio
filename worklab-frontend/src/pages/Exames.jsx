@@ -15,22 +15,35 @@ export default function Exames() {
   // Estado para armazenar os exames
   const [exames, setExames] = useState([])
 
-  // Função para voltar para o menu principal
-  const handleVoltarParaMenu = () => navigateTo('/')
   // Função para navegar até a página de cadastrar exame
   const handleCadastrarExame = () => navigateTo('/cadastrar/exame')
 
   // Efeito colateral para carregar a lista de exames ao montar o componente
   useEffect(()=> {
-    axiosClient.get('/exames')
-    .then(response => {
-      setExames(response.data)
-    })
-    .catch(error => {
-      console.error('Erro ao obter lista de exames:', error)
-    })
+    const buscaExames = async () => {
+      try {
+        const response = await axiosClient.get('/exames')
+        if(response.data.length > 0) {
+          setExames(response.data)
+        } else {
+          setTimeout(()=> {
+            setExames([{
+              codigo: '',
+              descricao: 'Nenhum exame cadastrado'
+            }])
+          },1000)
+        }
+      } catch (error) {
+        console.error('Erro ao obter lista de exames:', error)
+      }
+    }
+
+    buscaExames()
   }, [])
 
+  
+  
+  console.log(exames)
   // Renderiza a estrutura do componente
   return (
     <div>
