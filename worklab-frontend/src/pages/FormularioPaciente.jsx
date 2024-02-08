@@ -15,7 +15,7 @@ import ButtonsDefault from "../components/ButtonsDefault";
 const FormularioPaciente =  () => {
   const { register, handleSubmit, reset } = useForm()
   const [ loading, setLoading ] = useState(false)
-
+console.log('render')
   // Função para lidar com o envio do formulário
   const handleSalvar = async  (data) => {
     setLoading(true)
